@@ -183,12 +183,14 @@
                                 <span class="title">用户列表</span>
                             </a>
                         </li>
+                        {{--
                         <li class="nav-item {{in_array(Request::path(), ['admin/userBalanceLogList']) ? 'active open' : ''}}">
                             <a href="{{url('admin/userBalanceLogList')}}" class="nav-link ">
                                 <i class="fa fa-money"></i>
                                 <span class="title">余额变动记录</span>
                             </a>
                         </li>
+                        --}}
                         <li class="nav-item {{in_array(Request::path(), ['admin/userBanLogList']) ? 'active open' : ''}}">
                             <a href="{{url('admin/userBanLogList')}}" class="nav-link ">
                                 <i class="fa fa-user-times"></i>
@@ -218,7 +220,7 @@
                         </li>
                     </ul>
                 </li>
-                <!--
+                {{-- 
                 <li class="nav-item {{in_array(Request::path(), ['marketing/emailList', 'marketing/pushList']) ? 'active open' : ''}}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-send-o"></i>
@@ -240,7 +242,8 @@
                         </li>
                     </ul>
                 </li>
-                -->
+                 --}}
+                {{-- 
                 <li class="nav-item {{in_array(Request::path(), ['admin/decompile', 'admin/convert', 'admin/import', 'admin/trafficLog', 'admin/analysis', 'admin/subscribeLog', 'emailLog/logList', 'payment/callbackList', 'sensitiveWords/list', 'sensitiveWords/add']) ? 'active open' : ''}}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-wrench"></i>
@@ -310,6 +313,7 @@
                         </li>
                     </ul>
                 </li>
+                 --}}
                 <li class="nav-item {{in_array(Request::path(), ['admin/config', 'admin/addConfig', 'admin/system']) ? 'active open' : ''}}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-gear"></i>
@@ -346,7 +350,7 @@
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
-    <div class="page-footer-inner"> 2017 - 2018 &copy; <a href="https://github.com/ssrpanel/ssrpanel" target="_blank">SSRPanel</a> </div>
+    <div class="page-footer-inner"> 2017 - 2018 &copy; 平头哥网络 </div>
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>
     </div>

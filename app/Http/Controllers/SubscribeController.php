@@ -92,7 +92,7 @@ class SubscribeController extends Controller
             $ssr_str .= '&udpport=0';
             $ssr_str .= '&uot=0';
             $ssr_str = base64url_encode($ssr_str);
-            $scheme .= 'ssr://' . $ssr_str . "\n";
+            $scheme .= 'ssr://' . $ssr_str . "\r\n";
         }
 
         exit(base64url_encode($scheme));

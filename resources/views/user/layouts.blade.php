@@ -40,11 +40,12 @@
     <div class="page-header-inner ">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            @if($website_logo)
+            {{-- @if($website_logo)
                 <a href="{{url('/user')}}"><img src="{{$website_logo}}" alt="logo" class="logo-default" style="width:110px; height:20px;"/> </a>
             @else
                 <a href="{{url('/user')}}"><img src="/assets/images/logo.png" alt="logo" class="logo-default" /> </a>
-            @endif
+            @endif --}}
+            <h2 style="color:#FFF;line-height: 14px;" class="logo-default">平头哥网络</h2>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
             </div>
@@ -180,7 +181,7 @@
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
 <div class="page-footer">
-    <div class="page-footer-inner"> 2017 - 2018 &copy; <a href="https://github.com/ssrpanel/ssrpanel" target="_blank">SSRPanel</a> </div>
+    <div class="page-footer-inner"> 2017 - 2018 &copy; 平头哥网络 </div>
     <div class="scroll-to-top">
         <i class="icon-arrow-up"></i>
     </div>

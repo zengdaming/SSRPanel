@@ -32,16 +32,17 @@
 <body class=" login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-    @if($website_home_logo)
+    {{-- @if($website_home_logo)
         <a href="javascript:;"> <img src="{{$website_home_logo}}" alt="" style="width:270px; height:48px;"/> </a>
     @else
         <a href="javascript:;"> <img src="/assets/images/home_logo.png" alt="" /> </a>
-    @endif
+    @endif --}}
+    <H1 style="color: #FFF">平头哥网络</H1>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
 <div class="content">
-    <nav style="padding-bottom: 20px;text-align: center;">
+    {{-- <nav style="padding-bottom: 20px;text-align: center;">
         @if(app()->getLocale() == 'zh-CN')
             <a href="{{url('lang', ['locale' => 'zh-tw'])}}">繁體中文</a>
             <a href="{{url('lang', ['locale' => 'en'])}}">English</a>
@@ -69,7 +70,7 @@
             <a href="{{url('lang', ['locale' => 'ko'])}}">한국어</a>
         @else
         @endif
-    </nav>
+    </nav> --}}
     <!-- BEGIN LOGIN FORM -->
     <form class="login-form" action="{{url('login')}}" method="post">
         <div class="alert alert-danger display-hide">

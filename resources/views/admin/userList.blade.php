@@ -28,6 +28,7 @@
                         </div>
                     </div>
                     <div class="portlet-body">
+                        {{--
                         <div class="row" style="padding-bottom:5px;">
                             <div class="col-md-2 col-sm-2">
                                 <input type="text" class="col-md-4 form-control input-sm" name="username" value="{{Request::get('username')}}" id="username" placeholder="用户名" onkeydown="if(event.keyCode==13){doSearch();}">
@@ -39,12 +40,13 @@
                                 <input type="text" class="col-md-4 form-control input-sm" name="qq" value="{{Request::get('qq')}}" id="qq" placeholder="QQ" onkeydown="if(event.keyCode==13){doSearch();}">
                             </div>
                         </div>
+                        --}}
                         <div class="row">
                             {{-- 
                             <div class="col-md-2 col-sm-2">
                                 <input type="text" class="col-md-4 form-control input-sm" name="port" value="{{Request::get('port')}}" id="port" placeholder="端口" onkeydown="if(event.keyCode==13){doSearch();}">
                             </div>
-                            --}}
+                            
                             <div class="col-md-2 col-sm-2">
                                 <select class="form-control input-sm" name="pay_way" id="pay_way" onChange="doSearch()">
                                     <option value="" @if(Request::get('pay_way') == '') selected @endif>付费方式</option>
@@ -54,6 +56,10 @@
                                     <option value="3" @if(Request::get('pay_way') == '3') selected @endif>半年付</option>
                                     <option value="4" @if(Request::get('pay_way') == '4') selected @endif>年付</option>
                                 </select>
+                            </div>
+                            --}}
+                            <div class="col-md-2 col-sm-2">
+                                <input type="text" class="col-md-4 form-control input-sm" name="username" value="{{Request::get('username')}}" id="username" placeholder="用户名" onkeydown="if(event.keyCode==13){doSearch();}">
                             </div>
                             <div class="col-md-2 col-sm-2">
                                 <select class="form-control input-sm" name="status" id="status" onChange="doSearch()">
@@ -143,9 +149,11 @@
                                                     <button type="button" class="btn btn-sm green btn-outline" onclick="doExport('{{$user->id}}')">
                                                         <i class="fa fa-paper-plane-o"></i>
                                                     </button>
+                                                    {{--
                                                     <button type="button" class="btn btn-sm purple btn-outline" onclick="doMonitor('{{$user->id}}')">
                                                         <i class="fa fa-area-chart"></i>
                                                     </button>
+                                                    --}}
                                                     <button type="button" class="btn btn-sm green-meadow btn-outline" onclick="resetTraffic('{{$user->id}}')">
                                                         <i class="fa fa-refresh"></i>
                                                     </button>
