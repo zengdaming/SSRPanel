@@ -145,7 +145,7 @@
                                                 <td>
                                                     <button type="button" class="btn btn-sm blue btn-outline" onclick="editUser('{{$user->id}}')">
                                                         <i class="fa fa-pencil"></i>
-                                                </button>
+                                                    </button>
                                                     <button type="button" class="btn btn-sm green btn-outline" onclick="doExport('{{$user->id}}')">
                                                         <i class="fa fa-paper-plane-o"></i>
                                                     </button>
