@@ -58,8 +58,8 @@
                                             <tr class="odd gradeX">
                                                 <td> {{$node->id}} </td>
                                                 <td> <span>{{$node->name}}</span> </td>
-                                                <td> <span class="label {{$node->status ? '' : 'label-danger'}}">{{$node->ip}}</span> </td>
-                                                <td> <span class="label {{$node->status ? '' : 'label-danger'}}">{{$node->server}}</span> </td>
+                                                <td> <span class="">{{$node->ip}}</span> </td>
+                                                <td> <span class="">{{$node->server==null?'无域名':$node->server}}</span> </td>
                                                 <td> <span class="label {{$node->status ? 'label-default' : 'label-danger'}}">{{$node->load}}</span> </td>
                                                 <td> <span class="label {{$node->online_users >0 ? 'label-success' : 'label-danger'}}">{{$node->online_users}}</span> </td>
                                                 <td> {{$node->transfer}} </td>
