@@ -110,6 +110,7 @@
                         <span class="selected"></span>
                     </a>
                 </li>
+                <!--
                 <li class="nav-item {{in_array(Request::path(), ['admin/inviteList']) ? 'active open' : ''}}">
                     <a href="{{url('admin/inviteList')}}" class="nav-link nav-toggle">
                         <i class="fa fa-puzzle-piece"></i>
@@ -121,19 +122,21 @@
                         <i class="fa fa-credit-card"></i>
                         <span class="title">提现管理</span>
                     </a>
-                </li>
+                </li>-->
                 <li class="nav-item {{in_array(Request::path(), ['shop/goodsList', 'shop/addGoods', 'shop/editGoods']) ? 'active open' : ''}}">
                     <a href="{{url('shop/goodsList')}}" class="nav-link nav-toggle">
                         <i class="fa fa-shopping-cart"></i>
                         <span class="title">商品管理</span>
                     </a>
                 </li>
+                <!--
                 <li class="nav-item {{in_array(Request::path(), ['coupon/couponList', 'coupon/addCoupon']) ? 'active open' : ''}}">
                     <a href="{{url('coupon/couponList')}}" class="nav-link nav-toggle">
                         <i class="fa fa-ticket"></i>
                         <span class="title">卡券管理</span>
                     </a>
                 </li>
+                -->
                 <li class="nav-item {{in_array(Request::path(), ['ticket/ticketList', 'ticket/replyTicket']) ? 'active open' : ''}}">
                     <a href="{{url('ticket/ticketList')}}" class="nav-link nav-toggle">
                         <i class="fa fa-question-circle"></i>
@@ -215,6 +218,7 @@
                         </li>
                     </ul>
                 </li>
+                <!--
                 <li class="nav-item {{in_array(Request::path(), ['marketing/emailList', 'marketing/pushList']) ? 'active open' : ''}}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-send-o"></i>
@@ -236,6 +240,7 @@
                         </li>
                     </ul>
                 </li>
+                -->
                 <li class="nav-item {{in_array(Request::path(), ['admin/decompile', 'admin/convert', 'admin/import', 'admin/trafficLog', 'admin/analysis', 'admin/subscribeLog', 'emailLog/logList', 'payment/callbackList', 'sensitiveWords/list', 'sensitiveWords/add']) ? 'active open' : ''}}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-wrench"></i>

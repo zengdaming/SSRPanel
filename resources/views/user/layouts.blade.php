@@ -135,6 +135,7 @@
                         <span class="title">{{trans('home.tickets')}}</span>
                     </a>
                 </li>
+                {{-- 
                 <li class="nav-item {{in_array(Request::path(), ['user/invite']) ? 'active open' : ''}}">
                     <a href="{{url('user/invite')}}" class="nav-link nav-toggle">
                         <i class="icon-user-follow"></i>
@@ -155,6 +156,7 @@
                     </a>
                 </li>
                 @endif
+                 --}}
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>

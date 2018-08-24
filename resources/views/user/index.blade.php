@@ -73,10 +73,10 @@
                                                 <a href="#tools3" data-toggle="tab"> <i class="fa fa-linux"></i> Linux </a>
                                             </li>
                                             <li>
-                                                <a href="#tools4" data-toggle="tab"> <i class="fa fa-apple"></i> iOS </a>
+                                                <a href="#tools5" data-toggle="tab"> <i class="fa fa-android"></i> Android </a>
                                             </li>
                                             <li>
-                                                <a href="#tools5" data-toggle="tab"> <i class="fa fa-android"></i> Android </a>
+                                                <a href="#tools4" data-toggle="tab"> <i class="fa fa-apple"></i> iOS </a>
                                             </li>
                                         </ul>
                                         <div class="tab-content" style="font-size:16px;">
@@ -106,16 +106,17 @@
                                             </div>
                                             <div class="tab-pane" id="tools4">
                                                 <ol>
-                                                    <li> 请从站长处获取App Store美区ID及教程 </li>
-                                                </ol>
-                                            </div>
-                                            <div class="tab-pane" id="tools5">
-                                                <ol>
                                                     <li> <a href="#" target="_blank">点击此处</a>下载客户端并启动 </li>
                                                     <li> 单击左上角的shadowsocksR进入配置文件页，点击右下角的“+”号，点击“添加/升级SSR订阅”，填入订阅信息并保存 </li>
                                                     <li> 选中任意一个节点，返回软件首页 </li>
                                                     <li> 在软件首页处找到“路由”选项，并将其改为“绕过局域网及中国大陆地址” </li>
                                                     <li> 点击右上角的小飞机图标进行连接，提示是否添加（或创建）VPN连接，点同意（或允许） </li>
+                                                </ol>
+                                            </div>
+                                            <div class="tab-pane" id="tools5">
+                                                <ol>
+                                                    <li> 推荐通过PP助手安装Shadowrocket </li>
+                                                    <li> <a href="https://jingyan.baidu.com/article/63acb44a1e1b8661fcc17e3c.html" target="_blank">点击打开教程</a> </li>
                                                 </ol>
                                             </div>
                                         </div>
@@ -144,7 +145,8 @@
                                                         </div>
                                                         <div class="mt-comment-body">
                                                             <div class="mt-comment-info">
-                                                                <span class="mt-comment-author">{{$node->name}} - {{$node->server ? $node->server : $node->ip}}</span>
+                                                                {{-- <span class="mt-comment-author">{{$node->name}} - {{$node->server ? $node->server : $node->ip}}</span> --}}
+                                                                <span class="mt-comment-author">{{$node->name}}</span>
                                                                 <span class="mt-comment-date">
                                                                     @if(!$node->online_status)
                                                                         <span class="badge badge-danger">维护中</span>
@@ -162,10 +164,10 @@
                                                                 </span>
                                                                 <ul class="mt-comment-actions" style="display: block;">
                                                                     <li>
-                                                                        <a class="btn btn-sm green btn-outline" data-toggle="modal" href="#link_{{$node->id}}"> <i class="fa fa-paper-plane"></i> </a>
+                                                                        <a class="btn btn-sm green btn-outline" data-toggle="modal" href="#link_{{$node->id}}"> <i class="fa fa-paper-plane"></i>URL </a>
                                                                     </li>
                                                                     <li>
-                                                                        <a class="btn btn-sm green btn-outline" data-toggle="modal" href="#qrcode_{{$node->id}}"> <i class="fa fa-qrcode"></i> </a>
+                                                                        <a class="btn btn-sm green btn-outline" data-toggle="modal" href="#qrcode_{{$node->id}}"> <i class="fa fa-qrcode"></i>二维码 </a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -196,9 +198,11 @@
                     @endif
                     <li class="list-group-item">
                         {{trans('home.account_balance')}}：{{$info['balance']}}
+                        {{--
                         <span class="badge badge-danger">
                             <a href="javascript:;" data-toggle="modal" data-target="#charge_modal" style="color:#FFF;">{{trans('home.recharge')}}</a>
                         </span>
+                        --}}
                     </li>
                     <li class="list-group-item">
                         {{trans('home.account_expire')}}：{{date('Y-m-d 0:0:0') > $info['expire_time'] ? trans('home.expired') : $info['expire_time']}}

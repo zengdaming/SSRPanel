@@ -19,8 +19,10 @@
                         </div>
                         <div class="actions">
                             <div class="btn-group btn-group-devided">
+                                {{--  
                                 <button class="btn sbold red" onclick="exportSSJson()"> 导出JSON </button>
                                 <button class="btn sbold blue" onclick="batchAddUsers()"> 批量生成 </button>
+                                --}}
                                 <button class="btn sbold blue" onclick="addUser()"> 添加用户 </button>
                             </div>
                         </div>
@@ -38,9 +40,11 @@
                             </div>
                         </div>
                         <div class="row">
+                            {{-- 
                             <div class="col-md-2 col-sm-2">
                                 <input type="text" class="col-md-4 form-control input-sm" name="port" value="{{Request::get('port')}}" id="port" placeholder="端口" onkeydown="if(event.keyCode==13){doSearch();}">
                             </div>
+                            --}}
                             <div class="col-md-2 col-sm-2">
                                 <select class="form-control input-sm" name="pay_way" id="pay_way" onChange="doSearch()">
                                     <option value="" @if(Request::get('pay_way') == '') selected @endif>付费方式</option>
@@ -78,9 +82,11 @@
                                     <th> # </th>
                                     <th> 用户名 </th>
                                     <th> 端口 </th>
+                                    {{--
                                     <th> 加密方式 </th>
                                     <th> 协议 </th>
                                     <th> 混淆 </th>
+                                    --}}
                                     <th> 已消耗 </th>
                                     <th> 最后使用 </th>
                                     <th> 有效期 </th>
@@ -99,10 +105,12 @@
                                             <tr class="odd gradeX {{$user->trafficWarning ? 'danger' : ''}}">
                                                 <td> {{$user->id}} </td>
                                                 <td> {{$user->username}} </td>
-                                                <td> <span class="label label-danger"> {{$user->port ? $user->port : '未分配'}} </span> </td>
+                                                <td> <span class="label label-info"> {{$user->port ? $user->port : '未分配'}} </span> </td>
+                                                {{--
                                                 <td> <span class="label label-default"> {{$user->method}} </span> </td>
                                                 <td> <span class="label label-default"> {{$user->protocol}} </span> </td>
                                                 <td> <span class="label label-default"> {{$user->obfs}} </span> </td>
+                                                --}}
                                                 <td class="center"> {{$user->used_flow}} / {{$user->transfer_enable}} </td>
                                                 <td class="center"> {{empty($user->t) ? '未使用' : date('Y-m-d H:i:s', $user->t)}} </td>
                                                 <td class="center">
