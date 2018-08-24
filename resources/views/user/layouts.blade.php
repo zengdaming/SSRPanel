@@ -45,7 +45,7 @@
             @else
                 <a href="{{url('/user')}}"><img src="/assets/images/logo.png" alt="logo" class="logo-default" /> </a>
             @endif --}}
-            <h2 style="color:#FFF;line-height: 14px;" class="logo-default">平头哥网络</h2>
+            <h2 style="color:#FFF;line-height: 14px;float: left" class="logo-default">平头哥网络</h2>
             <div class="menu-toggler sidebar-toggler">
                 <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
             </div>
