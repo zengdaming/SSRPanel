@@ -18,7 +18,7 @@
                     <div class="portlet-body">
                         <div class="row">
                             <div class="col-md-2 col-sm-2">
-                                <input type="text" class="col-md-4 form-control input-sm" name="username" value="{{Request::get('username')}}" id="username" placeholder="用户名" onkeydown="if(event.keyCode==13){do_search();}">
+                                <input type="text" class="col-md-4 form-control input-sm" name="username" value="{{Request::get('username')}}" id="username" placeholder="用户名" autocomplete="false" onkeydown="if(event.keyCode==13){do_search();}">
                             </div>
                             <div class="col-md-2 col-sm-2">
                                 <select class="form-control input-sm" name="is_expire" id="is_expire" onchange="doSearch()">
@@ -27,6 +27,7 @@
                                     <option value="1" @if(Request::get('is_expire') == '1') selected @endif>是</option>
                                 </select>
                             </div>
+                            {{--
                             <div class="col-md-2 col-sm-2">
                                 <select class="form-control input-sm" name="is_coupon" id="is_coupon" onchange="doSearch()">
                                     <option value="" @if(Request::get('is_coupon') == '') selected @endif>使用优惠券</option>
@@ -41,6 +42,7 @@
                                     <option value="2" @if(Request::get('pay_way') == '2') selected @endif>有赞云支付</option>
                                 </select>
                             </div>
+                            --}}
                             <div class="col-md-2 col-sm-2">
                                 <select class="form-control input-sm" name="status" id="status" onchange="doSearch()">
                                     <option value="" @if(Request::get('status') == '') selected @endif>订单状态</option>

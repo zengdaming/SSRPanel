@@ -173,6 +173,9 @@ class AdminController extends Controller
 
         $view['userList'] = $userList;
 
+        // 将网站的域名设置在session中，用来给前端生成推广连接
+        Session::put("websiteUrl",$this->systemConfig['website_url']);
+
         return Response::view('admin/userList', $view);
     }
 

@@ -145,7 +145,7 @@
                                                 <td>
                                                     <button type="button" class="btn btn-sm blue btn-outline" onclick="editUser('{{$user->id}}')">
                                                         <i class="fa fa-pencil"></i>
-                                                    </button>
+                                                </button>
                                                     <button type="button" class="btn btn-sm green btn-outline" onclick="doExport('{{$user->id}}')">
                                                         <i class="fa fa-paper-plane-o"></i>
                                                     </button>
@@ -155,6 +155,9 @@
                                                     </button>
                                                     --}}
                                                     <button type="button" class="btn btn-sm green-meadow btn-outline" onclick="resetTraffic('{{$user->id}}')">
+                                                        <i class="fa fa-refresh"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm green-meadow btn-outline" onclick="showRef('{{$user->id}}')">
                                                         <i class="fa fa-refresh"></i>
                                                     </button>
                                                 </td>
@@ -274,6 +277,11 @@
 
                 layer.close(index);
             });
+        }
+
+        // 显示用户推广链接地址
+        function showRef( userId){
+            layer.alert("{{Session::get("websitUrl")}}" + '?aff=' + userId );
         }
     </script>
 @endsection
