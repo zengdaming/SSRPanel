@@ -44,7 +44,7 @@
                     <p class="invoice-desc grand-total"> ￥{{$goods->price}} </p>
                 </div>
                 <div class="col-xs-6">
-                    <h2 class="invoice-title"> {{trans('home.coupon')}} </h2>
+                    {{-- <h2 class="invoice-title"> {{trans('home.coupon')}} </h2>
                     <p class="invoice-desc">
                     <div class="input-group">
                         <input class="form-control" type="text" name="coupon_sn" id="coupon_sn" placeholder="{{trans('home.coupon')}}" />
@@ -52,7 +52,7 @@
                             <button class="btn btn-default" type="button" onclick="redeemCoupon()"><i class="fa fa-refresh"></i> {{trans('home.redeem_coupon')}} </button>
                         </span>
                     </div>
-                    </p>
+                    </p> --}}
                 </div>
             </div>
             <div class="row">
@@ -60,7 +60,7 @@
                     @if($is_youzan)
                         <a class="btn btn-lg red hidden-print" onclick="onlinePay()"> {{trans('home.online_pay')}} </a>
                     @endif
-                    <a class="btn btn-lg blue hidden-print uppercase" onclick="pay()"> {{trans('home.service_pay_button')}} </a>
+                    {{-- <a class="btn btn-lg blue hidden-print uppercase" onclick="pay()"> {{trans('home.service_pay_button')}} </a> --}}
                 </div>
             </div>
         </div>
