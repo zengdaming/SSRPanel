@@ -109,14 +109,10 @@
                                             --}}
                                             <div class="tab-pane" id="tools4">
                                                 <ol>
-<<<<<<<<< Temporary merge branch 1
-                                                    <li> <a href="http://16bing.com/wp-content/uploads/shadowsocks/shadowsocks_v4.5.7.apk" target="_blank">点击此处下载客户端</a> </li>
-                                                    <li> <a href="http://16bing.com/2017/02/19/android-shadowsocks/">点击查看图文教程</a></li>
-=========
+
                                                     最新客户端   <a href="http://16bing.com/wp-content/uploads/shadowsocks/shadowsocks_v4.5.7.apk" target="_blank">点击下载</a>
                                                     ，详细图文教程 <a href="http://16bing.com/2017/02/19/android-shadowsocks/">点击查看</a>
                                                     <p></p>
->>>>>>>>> Temporary merge branch 2
                                                     <li> 单击左上角的shadowsocksR进入配置文件页，点击右下角的“+”号，点击“添加/升级SSR订阅”，填入订阅信息并保存 </li>
                                                     <li> 选中任意一个节点，返回软件首页 </li>
                                                     <li> 在软件首页处找到“路由”选项，并将其改为“绕过局域网及中国大陆地址” </li>
