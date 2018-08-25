@@ -69,22 +69,19 @@
                                             <li>
                                                 <a href="#tools2" data-toggle="tab"> <i class="fa fa-windows"></i> Windows </a>
                                             </li>
-                                            {{--
                                             <li>
                                                 <a href="#tools3" data-toggle="tab"> <i class="fa fa-linux"></i> Linux </a>
                                             </li>
-                                            --}}
                                             <li>
-                                                <a href="#tools5" data-toggle="tab"> <i class="fa fa-apple"></i> iOS </a>
+                                                <a href="#tools5" data-toggle="tab"> <i class="fa fa-apple"></i> Android </a>
                                             </li>
                                             <li>
-                                                <a href="#tools4" data-toggle="tab"> <i class="fa fa-android"></i> Android </a>
+                                                <a href="#tools4" data-toggle="tab"> <i class="fa fa-android"></i> iOS </a>
                                             </li>
                                         </ul>
                                         <div class="tab-content" style="font-size:16px;">
                                             <div class="tab-pane active" id="tools1">
                                                 <ol>
-                                                    {{-- <li> <a href="#" target="_blank">点击此处</a>下载客户端并启动 </li> --}}
                                                     <li> 单击状态栏小飞机，找到服务器->编辑订阅，复制黏贴订阅地址 </li>
                                                     <li> 点击服务器->手动更新订阅，更新您的服务信息 </li>
                                                     <li> 更新成功后，请在服务器菜单处选择线路，并点击打开ShadowsocksR </li>
@@ -93,13 +90,12 @@
                                             </div>
                                             <div class="tab-pane" id="tools2">
                                                 <ol>
-                                                    <li> <a href="http://ldy.pingtougg.com:8080/ssr-win.zip" target="_blank">点击此处</a>下载客户端并启动 </li>
+                                                    <li> <a href="#" target="_blank">点击此处</a>下载客户端并启动 </li>
                                                     <li> 单击状态栏小飞机，找到服务器->订阅->订阅设置，复制黏贴订阅地址 </li>
                                                     <li> 点击状态栏小飞机，找到模式，选中PAC </li>
                                                     <li> 点击状态栏小飞机，找到PAC，选中更新PAC为GFWList </li>
                                                 </ol>
                                             </div>
-                                            {{--
                                             <div class="tab-pane" id="tools3">
                                                 <ol>
                                                     <li> <a href="#" target="_blank">点击此处</a>下载客户端并启动 </li>
@@ -107,7 +103,6 @@
                                                     <li> 更新订阅设置即可 </li>
                                                 </ol>
                                             </div>
-                                            --}}
                                             <div class="tab-pane" id="tools4">
                                                 <ol>
                                                     最新客户端   <a href="http://16bing.com/wp-content/uploads/shadowsocks/shadowsocks_v4.5.7.apk" target="_blank">点击下载</a>

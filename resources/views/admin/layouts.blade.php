@@ -328,12 +328,14 @@
                                 <span class="title">通用配置</span>
                             </a>
                         </li>
+                        {{--
                         <li class="nav-item {{in_array(Request::path(), ['admin/system']) ? 'active open' : ''}}">
                             <a href="{{url('admin/system')}}" class="nav-link ">
                                 <i class="fa fa-cogs"></i>
                                 <span class="title">系统设置</span>
                             </a>
                         </li>
+                        --}}
                     </ul>
                 </li>
             </ul>
