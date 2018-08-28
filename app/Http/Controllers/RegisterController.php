@@ -14,6 +14,7 @@ use Redirect;
 use Session;
 use Cache;
 use Mail;
+use Cookie;
 
 /**
  * 注册控制器
@@ -247,6 +248,12 @@ class RegisterController extends Controller
             $view['is_free_code'] = $this->systemConfig['is_free_code'];
             $view['website_analytics'] = $this->systemConfig['website_analytics'];
             $view['website_customer_service'] = $this->systemConfig['website_customer_service'];
+
+            // 将推广参数存在cookie中，有效期7天
+            $aff = intval($request->get('aff', 0));
+            if($aff != null){
+                Cookie::queue('register_aff',$aff,10080);//过期时间7天：第三个参数是过期时间，单位是分钟
+            }
 
             return Response::view('register', $view);
         }
