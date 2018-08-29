@@ -13,16 +13,19 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    {{-- <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> --}}
+    {{-- <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" /> --}}
+    {{-- <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> --}}
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="/assets/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="/assets/pages/css/login-2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/pages/css/login-1.min.css?v=1" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
     <!-- END THEME LAYOUT STYLES -->
@@ -32,7 +35,7 @@
 <body class=" login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-    <H1 style="color: #FFF">平头哥网络</H1>
+    {{-- <H1 style="color: #FFF">平头哥网络</H1> --}}
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
@@ -67,6 +70,7 @@
         @endif
     </nav> --}}
     <!-- BEGIN REGISTRATION FORM -->
+    <h2 style="font-size: 2.5rem;padding-top: 0px">注册新用户</h2>
     <form class="register-form" action="{{url('register')}}" method="post" style="display: block;">
         @if($is_register)
             @if(Session::get('errorMsg'))
@@ -134,10 +138,13 @@
 <script src="/assets/global/plugins/excanvas.min.js"></script>
 <script src="/assets/global/plugins/ie8.fix.min.js"></script>
 <![endif]-->
-<script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+{{-- <script src="/assets/global/plugins/jquery.min.js" type="text/javascript"></script> --}}
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+{{-- <script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> --}}
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/assets/global/scripts/app.min.js" type="text/javascript"></script>
-<script src="/js/layer/layer.js" type="text/javascript"></script>
+{{-- <script src="/js/layer/layer.js" type="text/javascript"></script> --}}
+<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
 <script type="text/javascript">
     // 登录
     function login() {

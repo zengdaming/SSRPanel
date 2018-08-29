@@ -24,9 +24,9 @@
                                             <div class="caption" style="width:100%">
                                                 <div class="row">
                                                     <span class="caption-subject font-dark bold uppercase col-md-4">账号信息</span>
-                                                    <div class="text-right col-md-8" style="">
+                                                    {{-- <div class="text-right col-md-8" style="">
                                                         <button type="button" class="btn btn-sm btn-danger btn-outline" onclick="switchToUser()">切换身份</button>
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -34,7 +34,7 @@
                                             <div class="form-group">
                                                 <label for="username" class="col-md-3 control-label">用户名</label>
                                                 <div class="col-md-8">
-                                                    <input type="text" class="form-control" name="username" value="{{$user->username}}" id="username" placeholder="不填则不变" autofocus required>
+                                                    <input type="text" class="form-control" name="username" value="{{$user->username}}" id="username" placeholder="不填则不变" autofocus required disabled="true">
                                                     <input type="hidden" name="id" value="{{$user->id}}">
                                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                                 </div>
@@ -45,7 +45,7 @@
                                                     <input type="text" class="form-control" name="password" value="" id="password" placeholder="不填则不变">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label class="col-md-3 control-label">用途</label>
                                                 <div class="col-md-8">
                                                     <div class="mt-checkbox-inline">
@@ -67,8 +67,8 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
+                                            </div> --}}
+                                            {{-- <div class="form-group">
                                                 <label for="pay_way" class="col-md-3 control-label">付费方式</label>
                                                 <div class="col-md-8">
                                                     <div class="mt-radio-inline">
@@ -94,7 +94,7 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <label for="level" class="col-md-3 control-label">级别</label>
                                                 <div class="col-md-8">
@@ -107,7 +107,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="balance" class="col-md-3 control-label">余额</label>
                                                 <div class="col-md-5">
                                                     <p class="form-control-static"> {{$user->balance}} </p>
@@ -117,9 +117,9 @@
                                                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#handle_user_balance">充值</button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <!--
-                                            <div class="form-group">
+                                            </div> --}}
+                                            
+                                            {{-- <div class="form-group">
                                                 <label for="score" class="col-md-3 control-label">积分</label>
                                                 <div class="col-md-5">
                                                     <p class="form-control-static"> {{$user->score}} </p>
@@ -130,7 +130,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            -->
+                                             --}}
                                             <div class="form-group">
                                                 <label class="col-md-3 control-label">有效期</label>
                                                 <div class="col-md-8">
@@ -185,7 +185,7 @@
                                                     <input type="text" class="form-control" name="qq" value="{{$user->qq}}" id="qq" placeholder="">
                                                 </div>
                                             </div>
-                                            <div class="form-group">
+                                            {{-- <div class="form-group">
                                                 <label for="is_admin" class="col-md-3 control-label">管理员</label>
                                                 <div class="col-md-8">
                                                     <select class="form-control" name="is_admin" id="is_admin">
@@ -193,7 +193,7 @@
                                                         <option value="1" {{$user->is_admin == 1 ? 'selected' : ''}}>是</option>
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="form-group">
                                                 <label for="remark" class="col-md-3 control-label">备注</label>
                                                 <div class="col-md-8">

@@ -51,9 +51,9 @@
                                     </div>
                                     @if($subscribe_status)
                                         <input type="text" id="mt-target-1" class="form-control" value="{{$link}}" />
-                                        <a href="javascript:exchangeSubscribe();" class="btn green">
+                                        {{-- <a href="javascript:exchangeSubscribe();" class="btn green">
                                             {{trans('home.exchange_subscribe')}}
-                                        </a>
+                                        </a> --}}
                                         <a href="javascript:;" class="btn blue mt-clipboard" data-clipboard-action="copy" data-clipboard-target="#mt-target-1">
                                             {{trans('home.copy_subscribe_address')}}
                                         </a>
@@ -361,8 +361,9 @@
     <script src="/assets/global/plugins/clipboardjs/clipboard.min.js" type="text/javascript"></script>
     <script src="/assets/pages/scripts/components-clipboard.min.js" type="text/javascript"></script>
     <script src="/assets/global/plugins/jquery-qrcode/jquery.qrcode.min.js" type="text/javascript"></script>
-    <script src="/assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="/js/layer/layer.js" type="text/javascript"></script>
+    {{-- <script src="/assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script> --}}
+    {{-- <script src="/js/layer/layer.js" type="text/javascript"></script> --}}
+    <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
 
     <script type="text/javascript">
         // 充值

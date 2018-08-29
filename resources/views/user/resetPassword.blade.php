@@ -13,16 +13,19 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    {{-- <link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> --}}
+    {{-- <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" /> --}}
+    {{-- <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> --}}
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/simple-line-icons/2.4.1/css/simple-line-icons.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="/assets/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="/assets/pages/css/login-2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/pages/css/login-1.min.css" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
     <!-- END THEME LAYOUT STYLES -->
@@ -32,12 +35,13 @@
 <body class=" login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-    <a href="javascript:;"> <img src="/assets/images/home_logo.png" alt="" /> </a>
+    {{-- <a href="javascript:;"> <img src="/assets/images/home_logo.png" alt="" /> </a> --}}
+    {{-- <H1 style="color: #FFF">平头哥网络</H1> --}}
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
 <div class="content">
-    <nav style="padding-bottom: 20px;text-align: center;">
+    {{-- <nav style="padding-bottom: 20px;text-align: center;">
         @if(app()->getLocale() == 'zh-CN')
             <a href="{{url('lang', ['locale' => 'zh-tw'])}}">繁體中文</a>
             <a href="{{url('lang', ['locale' => 'en'])}}">English</a>
@@ -65,7 +69,7 @@
             <a href="{{url('lang', ['locale' => 'ko'])}}">한국어</a>
         @else
         @endif
-    </nav>
+    </nav> --}}
     @if (Session::get('errorMsg'))
         <div class="alert alert-danger">
             <button class="close" data-close="alert"></button>
@@ -79,13 +83,14 @@
         </div>
     @endif
     <!-- BEGIN FORGOT PASSWORD FORM -->
+    <h2 style="font-size: 2.5rem;padding-top: 0px">重置密码</h2>
     <form class="forget-form" action="{{url('resetPassword')}}" method="post" style="display: block;">
         @if($is_reset_password)
-            <div class="form-title">
+            {{-- <div class="form-title">
                 <span class="form-title">{{trans('home.reset_password_title')}}</span>
-            </div>
+            </div> --}}
             <div class="form-group">
-                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="" name="username" value="{{Request::old('username')}}" required autofocus />
+                <input class="form-control placeholder-no-fix" type="text" autocomplete="off" name="username" value="{{Request::old('username')}}" required autofocus placeholder="请输入注册的电子邮箱" />
                 <input type="hidden" name="_token" value="{{csrf_token()}}" />
             </div>
         @else

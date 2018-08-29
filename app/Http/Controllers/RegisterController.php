@@ -251,7 +251,7 @@ class RegisterController extends Controller
 
             // 将推广参数存在cookie中，有效期7天
             $aff = intval($request->get('aff', 0));
-            if($aff != null){
+            if($aff >0){
                 Cookie::queue('register_aff',$aff,10080);//过期时间7天：第三个参数是过期时间，单位是分钟
             }
 

@@ -10,6 +10,7 @@ use Redirect;
 use Captcha;
 use Session;
 use Cache;
+use Cookie;
 
 /**
  * 登录控制器
@@ -116,6 +117,12 @@ class LoginController extends Controller
             $view['website_home_logo'] = $this->systemConfig['website_home_logo'];
             $view['website_analytics'] = $this->systemConfig['website_analytics'];
             $view['website_customer_service'] = $this->systemConfig['website_customer_service'];
+
+            // 将推广参数存在cookie中，有效期7天
+            $aff = intval($request->get('aff', 0));
+            if($aff >0){
+                Cookie::queue('register_aff',$aff,10080);//过期时间7天：第三个参数是过期时间，单位是分钟
+            }
 
             return Response::view('login', $view);
         }

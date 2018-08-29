@@ -22,7 +22,7 @@
     <link href="/assets/global/css/components-rounded.min.css" rel="stylesheet" id="style_components" type="text/css" />
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
-    <link href="/assets/pages/css/login-2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/pages/css/login-1.min.css?v=1" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
     <!-- END THEME LAYOUT STYLES -->
@@ -37,7 +37,7 @@
     @else
         <a href="javascript:;"> <img src="/assets/images/home_logo.png" alt="" /> </a>
     @endif --}}
-    <H1 style="color: #FFF">平头哥网络</H1>
+    {{-- <H1 style="color: #FFF">平头哥网络</H1> --}}
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
@@ -72,6 +72,7 @@
         @endif
     </nav> --}}
     <!-- BEGIN LOGIN FORM -->
+    <h2 style="font-size: 2.5rem;padding-top: 0px">用户登陆</h2>
     <form class="login-form" action="{{url('login')}}" method="post">
         <div class="alert alert-danger display-hide">
             <button class="close" data-close="alert"></button>

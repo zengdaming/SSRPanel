@@ -158,7 +158,7 @@
                                                         <i class="fa fa-refresh"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-sm blue btn-outline" onclick="showRef('{{$user->id}}')">
-                                                        <i class="fa fa-share-alt"></i>推广链接
+                                                        <i class="fa fa-share-alt"></i> 推广链接
                                                     </button>
                                                 </td>
                                             </tr>
@@ -185,6 +185,11 @@
         <!-- END PAGE BASE CONTENT -->
     </div>
     <!-- END CONTENT BODY -->
+
+    <!-- 推广连接弹出框HTML -->
+    <div id="ref-dialog" style="padding:16px 16px 0px 16px;display: none">
+        <input type="txt" name="" class="form-control" value=""/>
+    </div>
 @endsection
 @section('script')
     <script src="/js/layer/layer.js" type="text/javascript"></script>
@@ -280,9 +285,30 @@
         }
 
         // 显示用户推广链接地址
-        function showRef( userId){
-            var host = '{{$link}}';
-            layer.alert(host + '/register?aff=' + userId );
-        }
+        // var showRef = buildShowRefFunc();
+
+        var showRef = function () {
+
+            var $dialog = null;//用于缓存推广连接的对话框对象
+            return function ( userId ) {
+                if( $dialog == null ){ $dialog = $('#ref-dialog'); }
+                if( $dialog == null ){ alert('初始化提示窗口失败'); return; }
+
+                $dialog.children('input').val('http://ldy.pingtougg.com?aff=' + userId);
+
+                layer.open({
+                    type : 1,
+                    title: '推广连接地址',
+                    area : '400px',
+                    content:$dialog,
+                    btn:['关闭'],
+                    yes:function(id,layero){
+                        layer.close(id);
+                    }
+                });
+            }
+        }();
     </script>
 @endsection
+
+
