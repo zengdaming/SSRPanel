@@ -24,7 +24,7 @@ class closeTicket extends Mailable
 
     public function build()
     {
-        return $this->view('emails.closeTicket')->subject('工单关闭提醒')->with([
+        return $this->view('emails.closeTicket')->subject('您在 ' . $this->websiteName . ' 的工单已关闭')->with([
             'websiteName' => $this->websiteName,
             'title'       => $this->title,
             'content'     => $this->content

@@ -69,11 +69,6 @@
                                             <li>
                                                 <a href="#tools2" data-toggle="tab"> <i class="fa fa-windows"></i> Windows </a>
                                             </li>
-                                            {{--
-                                            <li>
-                                                <a href="#tools3" data-toggle="tab"> <i class="fa fa-linux"></i> Linux </a>
-                                            </li>
-                                            --}}
                                             <li>
                                                 <a href="#tools5" data-toggle="tab"> <i class="fa fa-apple"></i> iOS </a>
                                             </li>
@@ -92,26 +87,17 @@
                                             </div>
                                             <div class="tab-pane" id="tools2">
                                                 <ol>
-                                                    <li> <a href="http://ldy.pingtougg.com:8080/ssr-win.zip" target="_blank">点击此处</a>下载客户端并启动 </li>
-                                                    <li> 单击状态栏小飞机，找到服务器->订阅->订阅设置，复制黏贴订阅地址 </li>
-                                                    <li> 点击状态栏小飞机，找到模式，选中PAC </li>
-                                                    <li> 点击状态栏小飞机，找到PAC，选中更新PAC为GFWList </li>
+                                                    <li> <a href="https://zdm-dev.oss-cn-shenzhen.aliyuncs.com/my/ssr-win.zip" target="_blank">点击此处</a>下载客户端并启动 </li>
+                                                    <li> 鼠标右键&nbsp;单击状态栏小飞机，找到服务器->订阅->订阅设置，复制黏贴订阅地址 </li>
+                                                    <li> 鼠标右键&nbsp;单击状态栏小飞机，找到模式，选中PAC </li>
+                                                    <li> 鼠标右键&nbsp;单击状态栏小飞机，找到PAC，选中更新PAC为GFWList </li>
                                                 </ol>
                                             </div>
-                                            {{--
-                                            <div class="tab-pane" id="tools3">
-                                                <ol>
-                                                    <li> <a href="#" target="_blank">点击此处</a>下载客户端并启动 </li>
-                                                    <li> 单击状态栏小飞机，找到服务器->编辑订阅，复制黏贴订阅地址 </li>
-                                                    <li> 更新订阅设置即可 </li>
-                                                </ol>
-                                            </div>
-                                            --}}
                                             <div class="tab-pane" id="tools4">
                                                 <ol>
 
-                                                    最新客户端   <a href="http://16bing.com/wp-content/uploads/shadowsocks/shadowsocks_v4.5.7.apk" target="_blank">点击下载</a>
-                                                    ，详细图文教程 <a href="http://16bing.com/2017/02/19/android-shadowsocks/">点击查看</a>
+                                                    最新客户端   <a href="https://zdm-dev.oss-cn-shenzhen.aliyuncs.com/my/shadowsocksr-android-3.5.4.apk" target="_blank">点击下载</a>
+                                                    ，详细图文教程 <a href="http://t.cn/RFLjC5t" target="_blank">点击查看</a>
                                                     <p></p>
                                                     <li> 单击左上角的shadowsocksR进入配置文件页，点击右下角的“+”号，点击“添加/升级SSR订阅”，填入订阅信息并保存 </li>
                                                     <li> 选中任意一个节点，返回软件首页 </li>
