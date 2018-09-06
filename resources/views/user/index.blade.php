@@ -122,7 +122,84 @@
                     </div>
                 </div>
                 <div class="row widget-row">
-                    <div class="col-md-12">
+                    <div class="col-md-12" >
+                        <div class="list-group">
+                            @foreach($nodeList as $node)
+                            <li class="list-group-item">
+                                <div class="mt-comment" style="padding:10px">
+                                    <div style="position: absolute;">
+                                        @if($node->country_code)
+                                            <img src="{{asset('assets/images/country/' . $node->country_code . '.png')}}"/>
+                                        @else
+                                            <img src="{{asset('/assets/images/country/un.png')}}"/>
+                                        @endif
+                                    </div>
+                                    <div class="mt-comment-body" style="margin-left:80px">
+                                        <div class="mt-comment-info" style="margin-bottom: 16px;">
+                                            {{-- <span class="mt-comment-author">{{$node->name}} - {{$node->server ? $node->server : $node->ip}}</span> --}}
+                                            <span class="mt-comment-author">
+                                                <span style="font-size: 1.6rem"> {{$node->name}} &nbsp;</span>
+                                                @if($node->labels)
+                                                    @foreach($node->labels as $vo)
+                                                        <span class="badge badge-info">{{$vo->labelInfo->name}}</span>
+                                                    @endforeach
+                                                @endif
+                                            </span>
+                                            <span class="mt-comment-date">
+                                                @if(!$node->online_status)
+                                                    <span class="badge badge-danger">维护中</span>
+                                                @endif
+                                            </span>
+                                        </div>
+                                        <div class="mt-comment-text"> {{$node->desc}} </div>
+                                        <div class="mt-comment-details">
+                                            <div style="float: right;">
+                                                <span style="font-size: 1.6rem;color:#aaa"><i class="fa fa-qrcode"></i>二维码</span>&nbsp;
+                                                {{-- 普通模式 --}}
+                                                @if($node->single === 0) 
+                                                    <button class="btn green btn-outline" onclick="showQR('{{$node->normal_ssr_scheme}}')"> <i class="fa fa-qrcode"></i> 通用 </button>
+                                                    {{-- <a onclick="showQR('{{$node->normal_ssr_scheme}}')">
+                                                        <img src="/assets/images/icons/connectplus-icon.jpg" class="img-rounded" style="border: 1px solid #ccc; width: 32px">
+                                                    </a> --}}
+                                                {{-- 严格的单端口模式 --}}
+                                                @elseif($node->single === 1 && $node->single_force===1) 
+                                                    {{-- <button class="btn green btn-outline" onclick="showQR('{{$node->ssr_scheme}}')"> <i class="fa fa-rocket"></i> 通用二维码 </button> --}}
+                                                    <a onclick="showQR('{{$node->ssr_scheme}}')">
+                                                        <img src="/assets/images/icons/rocket-icon.jpg" class="img-rounded" style="border: 1px solid #ccc; width: 32px">
+                                                    </a>
+                                                    &nbsp;
+                                                    <a onclick="showQR('{{$node->ssr_scheme}}')">
+                                                        <img src="/assets/images/icons/android-icon.png" class="img-rounded" style="border: 1px solid #ccc; width: 32px">
+                                                    </a>
+                                                {{-- 宽松单端口模式，能同时支持普通模式 --}}
+                                                @elseif( $node->single === 1 )
+                                                    {{--
+                                                    <button class="btn green btn-outline" onclick="showQR('{{$node->normal_ssr_scheme}}')"> <i class="fa fa-qrcode"></i> ConnectPlus二维码 </button>
+                                                    <button class="btn green btn-outline" onclick="showQR('{{$node->ssr_scheme}}')"> <i class="fa fa-rocket"></i> 通用二维码 </button>
+                                                    --}}
+                                                    <a onclick="showQR('{{$node->normal_ssr_scheme}}')">
+                                                        <img src="/assets/images/icons/connectplus-icon.jpg" class="img-rounded" style="border: 1px solid #ccc; width: 32px">
+                                                    </a>
+                                                    &nbsp;
+                                                    <a onclick="showQR('{{$node->ssr_scheme}}')">
+                                                        <img src="/assets/images/icons/rocket-icon.jpg" class="img-rounded" style="border: 1px solid #ccc; width: 32px">
+                                                    </a>
+                                                    &nbsp;
+                                                    <a onclick="showQR('{{$node->ssr_scheme}}')">
+                                                        <img src="/assets/images/icons/android-icon.png" class="img-rounded" style="border: 1px solid #ccc; width: 32px">
+                                                    </a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </li>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="col-md-12" style="display: none;">
                         <div class="portlet light bordered">
                             <div class="portlet-body">
                                 <div class="tab-content">
@@ -130,7 +207,7 @@
                                         <div class="mt-comments">
                                             @if(!$nodeList->isEmpty())
                                                 @foreach($nodeList as $node)
-                                                    <div class="mt-comment">
+                                                    <div class="mt-comment" style="border-bottom: 1px solid #CCC">
                                                         <div class="mt-comment-img" style="width:auto;">
                                                             @if($node->country_code)
                                                                 <img src="{{asset('assets/images/country/' . $node->country_code . '.png')}}"/>
@@ -141,7 +218,14 @@
                                                         <div class="mt-comment-body">
                                                             <div class="mt-comment-info">
                                                                 {{-- <span class="mt-comment-author">{{$node->name}} - {{$node->server ? $node->server : $node->ip}}</span> --}}
-                                                                <span class="mt-comment-author">{{$node->name}}</span>
+                                                                <span class="mt-comment-author">
+                                                                    <span> {{$node->name}} &nbsp;</span>
+                                                                    @if($node->labels)
+                                                                        @foreach($node->labels as $vo)
+                                                                            <span class="badge badge-info">{{$vo->labelInfo->name}}</span>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </span>
                                                                 <span class="mt-comment-date">
                                                                     @if(!$node->online_status)
                                                                         <span class="badge badge-danger">维护中</span>
@@ -150,6 +234,7 @@
                                                             </div>
                                                             <div class="mt-comment-text"> {{$node->desc}} </div>
                                                             <div class="mt-comment-details">
+                                                                {{--
                                                                 <span class="mt-comment-status mt-comment-status-pending">
                                                                     @if($node->labels)
                                                                         @foreach($node->labels as $vo)
@@ -157,13 +242,27 @@
                                                                         @endforeach
                                                                     @endif
                                                                 </span>
+                                                                --}}
                                                                 <ul class="mt-comment-actions" style="display: block;">
+                                                                    {{-- 普通模式 --}}
+                                                                    @if($node->single === 0) 
                                                                     <li>
-                                                                        <a class="btn btn-sm green btn-outline" data-toggle="modal" href="#link_{{$node->id}}"> <i class="fa fa-paper-plane"></i>URL </a>
+                                                                        <button class="btn green btn-outline" onclick="showQR('{{$node->normal_ssr_scheme}}')"> <i class="fa fa-qrcode"></i> ConnectPlus二维码 </button>
+                                                                    </li>
+                                                                    {{-- 严格的单端口模式 --}}
+                                                                    @elseif($node->single === 1 && $node->single_force===1) 
+                                                                    <li>
+                                                                        <button class="btn green btn-outline" onclick="showQR('{{$node->ssr_scheme}}')"> <i class="fa fa-rocket"></i> 通用二维码 </button>
+                                                                    </li>
+                                                                    {{-- 宽松单端口模式，能同时支持普通模式 --}}
+                                                                    @elseif( $node->single === 1 ) 
+                                                                    <li>
+                                                                        <button class="btn green btn-outline" onclick="showQR('{{$node->normal_ssr_scheme}}')"> <i class="fa fa-qrcode"></i> ConnectPlus二维码 </button>
                                                                     </li>
                                                                     <li>
-                                                                        <a class="btn btn-sm green btn-outline" data-toggle="modal" href="#qrcode_{{$node->id}}"> <i class="fa fa-qrcode"></i>二维码 </a>
+                                                                        <button class="btn green btn-outline" onclick="showQR('{{$node->ssr_scheme}}')"> <i class="fa fa-rocket"></i> 通用二维码 </button>
                                                                     </li>
+                                                                    @endif
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -354,6 +453,12 @@
             </div>
         @endforeach
         <!-- END PAGE BASE CONTENT -->
+        {{-- 显示二维码的面板 --}}
+        <div id="qrcode-dialog" style="display: none;">
+            <div style="padding:16px">
+                <div id="qrcode-img" style="text-align: center;"></div>
+            </div>
+        </div>
     </div>
     <!-- END CONTENT BODY -->
 @endsection
@@ -426,7 +531,7 @@
         var UIModals = function () {
             var n = function () {
                 @foreach($nodeList as $node)
-                    $("#txt_{{$node->id}}").draggable({handle: ".modal-header"});
+                    // $("#txt_{{$node->id}}").draggable({handle: ".modal-header"});
                     $("#qrcode_{{$node->id}}").draggable({handle: ".modal-header"});
                 @endforeach
             };
@@ -477,5 +582,23 @@
                 layer.close(index);
             });
         }
+
+        //新版显示二维码的控制代码
+        var showQR = function () {
+            var $qrcodeDialog = null;//利用闭包缓存对象
+            var $qrcodeImg    = null;
+            return function ( scheme ){
+                if( $qrcodeDialog == null ){ $qrcodeDialog = $('#qrcode-dialog'); }
+                if( $qrcodeImg    == null ){    $qrcodeImg = $('#qrcode-img');    }
+                $qrcodeImg.empty();//清空原来的二维码，不清空，每次执行会叠加新二维码
+                $qrcodeImg.qrcode(scheme);
+                layer.open({
+                    type  :1,
+                    title :'节点二维码',
+                    // area  :'400px',
+                    content:$qrcodeDialog
+                });
+            }
+        }();
     </script>
 @endsection

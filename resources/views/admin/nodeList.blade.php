@@ -44,7 +44,7 @@
                                     <th> 在线 </th>
                                     <th> <span class="node-flow"><a href="javascript:showFlowTips();">产生流量</a></span> </th>
                                     <th> 流量比例 </th>
-                                    <th> 扩展 </th>
+                                    <th> 模式 </th>
                                     <th> 操作 </th>
                                 </tr>
                                 </thead>
@@ -63,10 +63,15 @@
                                                 <td> <span class="label {{$node->status ? 'label-default' : 'label-danger'}}">{{$node->load}}</span> </td>
                                                 <td> <span class="label {{$node->online_users >0 ? 'label-success' : 'label-danger'}}">{{$node->online_users}}</span> </td>
                                                 <td> {{$node->transfer}} </td>
-                                                <td> <span class="label label-danger">{{$node->traffic_rate}}</span> </td>
+                                                <td> {{$node->traffic_rate}} </td>
                                                 <td>
-                                                    @if($node->compatible) <span class="label label-info">兼</span> @endif
-                                                    @if($node->single) <span class="label label-info">单</span> @endif
+                                                    @if($node->compatible)  <span class="label label-info">兼容</span> @endif
+                                                    @if($node->single == 0) <span class="label label-success">普通</span> @endif
+                                                    @if($node->single == 1 && $node->single_force===1) 
+                                                    <span class="label label-success">单端口</span> 
+                                                    @elseif( $node->single == 1 )
+                                                    <span class="label label-info">混合</span> 
+                                                    @endif
                                                     @if(!$node->is_subscribe) <span class="label label-info"><s>订</s></span> @endif
                                                 </td>
                                                 <td>

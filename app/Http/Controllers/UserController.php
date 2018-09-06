@@ -119,6 +119,34 @@ class UserController extends Controller
             $ssr_str = base64url_encode($ssr_str);
             $ssr_scheme = 'ssr://' . $ssr_str;
 
+            // 生成单端口模式的scheme
+            $single_ssr_str = ($node->server ? $node->server : $node->ip) . ':' . $node->single_port;
+            $single_ssr_str .= ':' . $node->single_protocol . ':' . $node->single_method;
+            $single_ssr_str .= ':' . $node->single_obfs     . ':' . base64url_encode($node->single_passwd);
+            $single_ssr_str .= '/?obfsparam=' . base64url_encode($obfs_param);
+            $single_ssr_str .= '&protoparam=' . base64url_encode($protocol_param);
+            $single_ssr_str .= '&remarks=' . base64url_encode($node->name);
+            $single_ssr_str .= '&group=' . base64url_encode(empty($group) ? '' : $group->name);
+            $single_ssr_str .= '&udpport=0';
+            $single_ssr_str .= '&uot=0';
+            $single_ssr_str = base64url_encode($single_ssr_str);
+            $single_ssr_scheme = 'ssr://' . $single_ssr_str;
+
+
+            // 生成普通模式的scheme
+            $normal_ssr_str = ($node->server ? $node->server : $node->ip) . ':' . $user->port;
+            $normal_ssr_str .= ':' . $user->protocol . ':' . $user->method;
+            $normal_ssr_str .= ':' . $user->obfs     . ':' . base64url_encode($user->passwd);
+            $normal_ssr_str .= '/?obfsparam=' . base64url_encode($obfs_param);
+            $normal_ssr_str .= '&protoparam=' . base64url_encode($protocol_param);
+            $normal_ssr_str .= '&remarks=' . base64url_encode($node->name);
+            $normal_ssr_str .= '&group=' . base64url_encode(empty($group) ? '' : $group->name);
+            $normal_ssr_str .= '&udpport=0';
+            $normal_ssr_str .= '&uot=0';
+            $normal_ssr_str = base64url_encode($normal_ssr_str);
+            $normal_ssr_scheme = 'ssr://' . $normal_ssr_str;
+
+
             // 生成ss scheme
             $ss_str = $user->method . ':' . $user->passwd . '@';
             $ss_str .= ($node->server ? $node->server : $node->ip) . ':' . $user->port;
@@ -143,6 +171,8 @@ class UserController extends Controller
             $node->txt = $txt;
             $node->ssr_scheme = $ssr_scheme;
             $node->ss_scheme = $node->compatible ? $ss_scheme : ''; // 节点兼容原版才显示
+            $node->normal_ssr_scheme  = $normal_ssr_scheme;
+            $node->single_ssr_scheme  = $single_ssr_scheme;
 
             // 节点在线状态
             $nodeInfo = SsNodeInfo::query()->where('node_id', $node->node_id)->where('log_time', '>=', strtotime("-10 minutes"))->orderBy('id', 'desc')->first();
