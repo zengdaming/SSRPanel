@@ -294,7 +294,7 @@
                 if( $dialog == null ){ $dialog = $('#ref-dialog'); }
                 if( $dialog == null ){ alert('初始化提示窗口失败'); return; }
 
-                $dialog.children('input').val('http://ldy.pingtougg.com?aff=' + userId);
+                $dialog.children('input').val('http://www.pingtougg.com?aff=' + userId);
 
                 layer.open({
                     type : 1,

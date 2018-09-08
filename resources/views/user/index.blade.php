@@ -108,7 +108,7 @@
                                             <div class="tab-pane" id="tools5">
                                                 <ol>
                                                     推荐通过PP助手安装ShadowRocket（俗称小火箭），
-                                                    <a href="http://ldy.pingtougg.com:8080/ios-ssr.html" target="_blank">点击查看详细教程</a>
+                                                    <a href="http://t.cn/Rsxvdr7" target="_blank">点击查看详细教程</a>
                                                     <p></p>
                                                     <li> 点击本页面下方的服务器的二维码按钮，展示账号二维码 </li>
                                                     <li> 启动ShadowRocket，点击左上角的扫描二维码按钮，扫描页面上的二维码 </li>
