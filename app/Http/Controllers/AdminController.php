@@ -362,12 +362,16 @@ class AdminController extends Controller
                     'enable_time'          => empty($enable_time) ? date('Y-m-d') : $enable_time,
                     'expire_time'          => empty($expire_time) ? date('Y-m-d', strtotime("+365 days")) : $expire_time,
                     'remark'               => $remark,
-                    'level'                => $level,
-                    'is_admin'             => $is_admin
+                    'level'                => $level
+                    // 'is_admin'             => $is_admin
                 ];
 
                 if (!empty($password)) {
                     $data['password'] = md5($password);
+                }
+
+                if ( !empty($is_admin) ){
+                    $data['is_admin'] = $is_admin;
                 }
 
                 User::query()->where('id', $id)->update($data);

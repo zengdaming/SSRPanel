@@ -100,7 +100,8 @@ class LoginController extends Controller
             return Redirect::to('user')->cookie('remember', $remember_token, 36000);
         } else {
             if ($request->cookie("remember")) {
-                $u = User::query()->where("remember_token", $request->cookie("remember"))->first();
+                // 被禁用的用户不能自动登陆
+                $u = User::query()->where('status', '>=', 0)->where("remember_token", $request->cookie("remember"))->first();
                 if ($u) {
                     Session::put('user', $u->toArray());
 

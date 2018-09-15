@@ -79,6 +79,9 @@
                                         <div class="tab-content" style="font-size:16px;">
                                             <div class="tab-pane active" id="tools1">
                                                 <ol>
+                                                    <li> 
+                                                      安装与使用教程：<a href="http://pingtougg.com/mac-tutorial.html" target="_blank">点击查看</a>，最新客户端：<a href="https://ptg.oss-cn-shenzhen.aliyuncs.com/tutorial/macos/ShadowsocksX-NG-R8.dmg" target="_blank">点击此处</a>
+                                                    </li>
                                                     <li> 单击状态栏小飞机，找到服务器->编辑订阅，复制黏贴订阅地址 </li>
                                                     <li> 点击服务器->手动更新订阅，更新您的服务信息 </li>
                                                     <li> 更新成功后，请在服务器菜单处选择线路，并点击打开ShadowsocksR </li>
