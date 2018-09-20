@@ -27,13 +27,13 @@ class YzyController extends Controller
     // 接收GET请求
     public function index(Request $request)
     {
-        \Log::info("YZY-GET:" . var_export($request->all()) . '[' . $request->getClientIp() . ']');
+        Log::info("YZY-GET:" . var_export($request->all()) . '[' . $request->getClientIp() . ']');
     }
 
     // 接收POST请求
     public function store(Request $request)
     {
-        \Log::info("YZY-POST:" . var_export($request->all()));
+        Log::info("YZY-POST:" . var_export($request->all()));
 
         $json = file_get_contents('php://input');
         $data = json_decode($json, true);
