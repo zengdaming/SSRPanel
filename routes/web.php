@@ -98,6 +98,9 @@ Route::group(['middleware' => ['forbidden', 'user', 'admin']], function () {
     Route::get("sensitiveWords/list", "SensitiveWordsController@sensitiveWordslist"); // 敏感词列表
     Route::post("sensitiveWords/add", "SensitiveWordsController@addSensitiveWords"); // 添加敏感词
     Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index'); // 系统运行日志
+    Route::get('admin/inviteStatistic', 'InviteStatisticController@index'); // 推广统计
+    Route::post('admin/inviteStatistic/list', 'InviteStatisticController@list'); // 推广统计
+    Route::get('admin/inviteStatistic/tradeLog', 'InviteStatisticController@tradeLog'); // 推广统计
 });
 
 Route::group(['middleware' => ['forbidden', 'user', 'affiliate']], function () {

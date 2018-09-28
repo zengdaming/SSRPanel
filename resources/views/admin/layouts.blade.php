@@ -204,6 +204,12 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item {{in_array(Request::path(), ['admin/inviteStatistic']) ? 'active open' : ''}}">
+                    <a href="{{url('admin/inviteStatistic')}}" class="nav-link nav-toggle">
+                        <i class="fa fa-question-circle"></i>
+                        <span class="title">推广统计</span>
+                    </a>
+                </li>
                 <li class="nav-item {{in_array(Request::path(), ['admin/nodeList', 'admin/addNode', 'admin/editNode', 'admin/groupList', 'admin/addGroup', 'admin/editGroup', 'admin/nodeMonitor']) ? 'active open' : ''}}">
                     <a href="javascript:;" class="nav-link nav-toggle">
                         <i class="fa fa-list-alt"></i>
