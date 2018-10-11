@@ -1,3 +1,4 @@
+{{-- 推广记录 --}}
 @extends('user.layouts')
 
 @section('css')
@@ -16,13 +17,8 @@
         <!-- BEGIN PAGE BASE CONTENT -->
         <div class="row">
             <div class="col-md-12">
-                <div class="note note-info">
-                    <p>{{trans('home.promote_link', ['traffic' => $referral_traffic, 'referral_percent' => $referral_percent * 100])}}</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
+
+                <!-- 推广链接 -->
                 <div class="portlet light form-fit bordered">
                     <div class="portlet-title">
                         <div class="caption">
@@ -40,7 +36,7 @@
                     </div>
                 </div>
 
-                <!-- 邀请记录 -->
+                <!-- 成功邀请注册记录 -->
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption font-dark">
@@ -52,7 +48,7 @@
                             <table class="table table-striped table-bordered table-hover table-checkable order-column">
                                 <thead>
                                 <tr>
-                                    <th> # </th>
+                                    <th> 序号 </th>
                                     <th> {{trans('home.invite_user_username')}} </th>
                                     <th> {{trans('home.invite_user_created_at')}}</th>
                                 </tr>
@@ -84,27 +80,27 @@
                     </div>
                 </div>
 
-                <!-- 推广记录 -->
+                <!-- 推广用户消费记录 -->
                 <div class="portlet light bordered">
                     <div class="portlet-title">
                         <div class="caption font-dark">
-                            <span class="caption-subject bold"> {{trans('home.referral_title')}} </span>
+                            <span class="caption-subject bold"> {{trans('home.referral_title')}} ({{trans('home.referral_total_amount',['amount'=>$totalAmount])}}) </span>
                         </div>
-                        <div class="actions">
+                        {{-- <div class="actions">
                             <button type="submit" class="btn red" onclick="extractMoney()"> {{trans('home.referral_table_apply')}} </button>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="portlet-body">
                         <div class="table-scrollable">
                             <table class="table table-striped table-bordered table-hover table-checkable order-column">
                                 <thead>
                                 <tr>
-                                    <th> # </th>
+                                    <th> 序号 </th>
                                     <th> {{trans('home.referral_table_date')}} </th>
                                     <th> {{trans('home.referral_table_user')}} </th>
                                     <th> {{trans('home.referral_table_amount')}} </th>
-                                    <th> {{trans('home.referral_table_commission')}} </th>
-                                    <th> {{trans('home.referral_table_status')}} </th>
+                                    {{-- <th> {{trans('home.referral_table_commission')}} </th> --}}
+                                    {{-- <th> {{trans('home.referral_table_status')}} </th> --}}
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -119,7 +115,7 @@
                                             <td> {{$referralLog->created_at}} </td>
                                             <td> {{$referralLog->user->username}} </td>
                                             <td> ￥{{$referralLog->amount}} </td>
-                                            <td> ￥{{$referralLog->ref_amount}} </td>
+                                            {{-- <td> ￥{{$referralLog->ref_amount}} </td>
                                             <td>
                                                 @if ($referralLog->status == 1)
                                                     <span class="label label-sm label-danger">申请中</span>
@@ -128,7 +124,7 @@
                                                 @else
                                                     <span class="label label-sm label-info">未提现</span>
                                                 @endif
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 @endif
@@ -136,9 +132,9 @@
                             </table>
                         </div>
                         <div class="row">
-                            <div class="col-md-5 col-sm-5">
+                            {{-- <div class="col-md-5 col-sm-5">
                                 <div class="dataTables_info" role="status" aria-live="polite">{{trans('home.referral_summary', ['total' => $referralLogList->total(), 'amount' => $canAmount, 'money' => $referral_money])}}</div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-7 col-sm-7">
                                 <div class="dataTables_paginate paging_bootstrap_full_number pull-right">
                                     {{ $referralLogList->links() }}
@@ -147,63 +143,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 提现记录 -->
-                <div class="portlet light bordered">
-                    <div class="portlet-title">
-                        <div class="caption font-dark">
-                            <span class="caption-subject bold"> {{trans('home.referral_apply_title')}} </span>
-                        </div>
-                    </div>
-                    <div class="portlet-body">
-                        <div class="table-scrollable">
-                            <table class="table table-striped table-bordered table-hover table-checkable order-column">
-                                <thead>
-                                <tr>
-                                    <th> # </th>
-                                    <th> {{trans('home.referral_apply_table_date')}} </th>
-                                    <th> {{trans('home.referral_apply_table_amount')}} </th>
-                                    <th> {{trans('home.referral_apply_table_status')}} </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @if($referralApplyList->isEmpty())
-                                    <tr>
-                                        <td colspan="6" style="text-align: center;"> {{trans('home.referral_table_none')}} </td>
-                                    </tr>
-                                @else
-                                    @foreach($referralApplyList as $key => $vo)
-                                        <tr class="odd gradeX">
-                                            <td> {{$key + 1}} </td>
-                                            <td> {{$vo->created_at}} </td>
-                                            <td> {{$vo->amount}} </td>
-                                            <td>
-                                                @if ($vo->status == 0)
-                                                    <span class="label label-sm label-danger">待审核</span>
-                                                @elseif($vo->status == 1)
-                                                    <span class="label label-sm label-default">审核通过待打款</span>
-                                                @elseif($vo->status == 2)
-                                                    <span class="label label-sm label-default">已打款</span>
-                                                @else
-                                                    <span class="label label-sm label-info">驳回</span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <div class="dataTables_paginate paging_bootstrap_full_number pull-right">
-                                    {{ $referralLogList->links() }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
         <!-- END PAGE BASE CONTENT -->

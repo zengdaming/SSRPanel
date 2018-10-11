@@ -10,7 +10,7 @@ Login page
 
 .login {
     background-color: #333;
-    background-image: url(../img/login/bg1.jpg);
+    /*background-image: url(../img/login/bg1.jpg);*/
     background-repeat: no-repeat;
     background-position: center;
 }

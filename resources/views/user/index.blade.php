@@ -470,8 +470,8 @@
     <script src="/assets/pages/scripts/components-clipboard.min.js" type="text/javascript"></script>
     <script src="/assets/global/plugins/jquery-qrcode/jquery.qrcode.min.js" type="text/javascript"></script>
     {{-- <script src="/assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script> --}}
-    {{-- <script src="/js/layer/layer.js" type="text/javascript"></script> --}}
-    <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+    <script src="/js/layer/layer.js" type="text/javascript"></script>
+    {{-- <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script> --}}
 
     <script type="text/javascript">
         // 充值

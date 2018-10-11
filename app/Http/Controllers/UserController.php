@@ -663,7 +663,7 @@ class UserController extends Controller
             }
 
             Cache::put('activeUser_' . md5($username), $activeTimes + 1, 1440);
-            Session::flash('successMsg', '邮件已发送，请查看邮箱');
+            Session::flash('successMsg', '激活邮件已发送，如未收到，请查看垃圾邮箱');
 
             return Redirect::back();
         } else {
@@ -1129,13 +1129,14 @@ class UserController extends Controller
         $view['referral_traffic'] = flowAutoShow($this->systemConfig['referral_traffic'] * 1048576);
         $view['referral_percent'] = $this->systemConfig['referral_percent'];
         $view['referral_money'] = $this->systemConfig['referral_money'];
-        $view['totalAmount'] = ReferralLog::query()->where('ref_user_id', $user['id'])->sum('ref_amount') / 100;
+        $view['totalAmount'] = ReferralLog::query()->where('ref_user_id', $user['id'])->sum('amount') / 100;
         $view['canAmount'] = ReferralLog::query()->where('ref_user_id', $user['id'])->where('status', 0)->sum('ref_amount') / 100;
         $view['link'] = $this->systemConfig['website_url'] . '/register?aff=' . $user['id'];
         $view['referralLogList'] = ReferralLog::query()->where('ref_user_id', $user['id'])->with('user')->paginate(10);
         $view['referralApplyList'] = ReferralApply::query()->where('user_id', $user['id'])->with('user')->paginate(10);
+        $view['referralUserList'] = User::query()->select(['username', 'created_at'])->where('referral_uid', $user['id'])->orderBy('id', 'desc')->paginate(10);
 
-        return Response::view('user/referral', $view);
+        return Response::view('user/referralLog', $view);
     }
 
     // 申请提现

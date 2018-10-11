@@ -338,6 +338,7 @@ class AdminController extends Controller
             $remark = str_replace("eval", "", str_replace("atob", "", $remark));
             $level = $request->get('level');
             $is_admin = $request->get('is_admin');
+            $is_salesman = $request->get('is_salesman');
 
             // 校验username是否已存在
             $exists = User::query()->where('id', '<>', $id)->where('username', $username)->first();
@@ -385,6 +386,9 @@ class AdminController extends Controller
 
                 if ( !empty($is_admin) ){
                     $data['is_admin'] = $is_admin;
+                }
+                if ( !empty($is_salesman) ){
+                    $data['is_salesman'] = $is_salesman;
                 }
 
                 User::query()->where('id', $id)->update($data);

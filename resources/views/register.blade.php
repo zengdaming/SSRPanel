@@ -143,8 +143,11 @@
 {{-- <script src="/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script> --}}
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/assets/global/scripts/app.min.js" type="text/javascript"></script>
-{{-- <script src="/js/layer/layer.js" type="text/javascript"></script> --}}
-<script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script>
+<script src="/js/layer/layer.js" type="text/javascript"></script>
+{{-- <script src="https://cdn.bootcss.com/layer/3.1.0/layer.js"></script> --}}
+
+<script src="https://cdn.bootcss.com/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+<script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
 <script type="text/javascript">
     // 登录
     function login() {
@@ -174,11 +177,6 @@
             }
         });
     }
-
-    // 推广cookies
-    $().ready(function(){
-        
-    });
 </script>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

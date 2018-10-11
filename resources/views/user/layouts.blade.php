@@ -146,13 +146,15 @@
                         <span class="title">{{trans('home.invite_code')}}</span>
                     </a>
                 </li>
+
                 <li class="nav-item {{in_array(Request::path(), ['user/trafficLog']) ? 'active open' : ''}}">
                     <a href="{{url('user/trafficLog')}}" class="nav-link nav-toggle">
                         <i class="icon-speedometer"></i>
                         <span class="title">{{trans('home.traffic_log')}}</span>
                     </a>
                 </li>
-                @if(Session::get('referral_status'))
+                --}}
+                @if(Session::get('user')['is_salesman']==1)
                 <li class="nav-item {{in_array(Request::path(), ['user/referral']) ? 'active open' : ''}}">
                     <a href="{{url('user/referral')}}" class="nav-link nav-toggle">
                         <i class="icon-diamond"></i>
@@ -160,7 +162,7 @@
                     </a>
                 </li>
                 @endif
-                 --}}
+                
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>

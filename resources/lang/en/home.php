@@ -7,6 +7,7 @@ return [
     'exchange_subscribe'              => 'Exchange Address',
     'subscribe_warning'               => 'Warning: This subscription address is for personal use only. Do not propagate the address.',
     'reset_password_title'            => 'Reset Password',
+    'username_placeholder'            => 'Please Enter E-mail',
     'system_down'                     => 'The system is being maintained',
     'subscribe_baned'                 => 'Your subscription function has been banned. Please contact the administrator.',
 
@@ -14,6 +15,7 @@ return [
     'home'                            => 'Home',
     'services'                        => 'Services',
     'traffic_log'                     => 'Monitor',
+    'help'                            => 'Help',
     'invite_code'                     => 'Invite Code',
     'invoices'                        => 'Invoices',
     'tickets'                         => 'Tickets',
@@ -86,7 +88,7 @@ return [
     'service_total_price'             => 'Total Price',
     'service_pay_button'              => 'Pay',
     'services_none'                   => 'None Services',
-    'service_traffic'                 => 'Transfer',
+    'service_traffic'                 => 'Traffic',
     'service_days'                    => 'Term of Validity',
     'service_buy_button'              => 'Order Now',
     'day'                             => 'days',
@@ -94,6 +96,7 @@ return [
     'redeem_coupon'                   => 'Redeem',
     'service_type_1'                  => 'Flow Packet',
     'service_type_2'                  => 'Flow Plans',
+    'service_type_3'                  => 'Balance',
 
     // 流量日志
     'traffic_log_tips'                => 'Tips: The update of the flow chart will be delayed.',
@@ -123,6 +126,7 @@ return [
     'invoice_title'                   => 'My Invoices',
     'invoice_table_id'                => 'No.',
     'invoice_table_name'              => 'Service',
+    'invoice_table_pay_way'           => 'Pay Method',
     'invoice_table_price'             => 'Amount',
     'invoice_table_create_date'       => 'Created On',
     'invoice_table_expire_at' 	      => 'Expire Time',
@@ -133,6 +137,7 @@ return [
     'invoice_table_wait_confirm'      => 'Wait Confirm',
     'invoice_table_wait_active'       => 'Active',
     'invoice_table_expired'           => 'Overdue',
+    'invoice_table_goods_deleted'     => '[Deleted]',
 
     // 工单
     'ticket_title'                    => 'My Tickets',
@@ -151,7 +156,8 @@ return [
     'ticket_reply_button'             => 'Reply',
 
     // 推广返利
-    'referral_title'                  => 'My Referrals',
+    'referral_title'                  => 'Commissions',
+    'referral_total_amount'           => 'Total :amount RMB',
     'referral_button'                 => 'Copy Link',
     'referral_my_link'                => 'My Referral Link',
     'referral_table_user'             => 'Who',
@@ -171,4 +177,7 @@ return [
     'logout'                          => 'Log Out',
     'promote_link'                    => 'With your promotion link registration and activation, both of you will receive :traffic traffic awards; when they are consumed, you will receive :referral_percent% of their consumption amount as a reward.',
     'promote_invite_code'             => 'With your invite code registration and activation, both of you will receive :traffic traffic awards; when they are consumed, you will receive :referral_percent% of their consumption amount as a reward.',
+    'invite_user_title'               => 'Invitation record',
+    'invite_user_username'            => 'Username',
+    'invite_user_created_at'          => 'Registration time',
 ];

@@ -166,6 +166,21 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="status" class="col-md-3 control-label">推广员</label>
+                                                <div class="col-md-8">
+                                                    <div class="mt-radio-inline">
+                                                        <label class="mt-radio">
+                                                            <input type="radio" name="is_salesman" value="1" {{$user->is_salesman == 1 ? 'checked' : ''}}> 是
+                                                            <span></span>
+                                                        </label>
+                                                        <label class="mt-radio">
+                                                            <input type="radio" name="is_salesman" value="0" {{$user->is_salesman != 1 ? 'checked' : ''}}> 否
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <hr>
                                             <div class="form-group">
                                                 <label for="labels" class="col-md-3 control-label">标签</label>
@@ -229,7 +244,7 @@
                                     <div class="portlet light bordered">
                                         <div class="portlet-title">
                                             <div class="caption">
-                                                <span class="caption-subject font-dark bold">代理信息</span>
+                                                <span class="caption-subject font-dark bold uppercase">代理信息</span>
                                             </div>
                                         </div>
                                         <div class="portlet-body">
@@ -462,6 +477,7 @@
             var wechat = $('#wechat').val();
             var qq = $('#qq').val();
             var is_admin = $("input:radio[name='is_admin']:checked").val();
+            var is_salesman = $("input:radio[name='is_salesman']:checked").val();
             var remark = $('#remark').val();
             var level = $("#level option:selected").val();
             var port = $('#port').val();
@@ -489,7 +505,7 @@
                 type: "POST",
                 url: "{{url('admin/editUser')}}",
                 async: false,
-                data: {_token:_token, id:id, username: username, password:password, usage:usage, pay_way:pay_way, balance:balance, score:score, status:status, labels:labels, enable_time:enable_time, expire_time:expire_time, gender:gender, wechat:wechat, qq:qq, is_admin:is_admin, remark:remark, level:level, port:port, passwd:passwd, method:method, transfer_enable:transfer_enable, enable:enable, protocol:protocol, protocol_param:protocol_param, obfs:obfs, obfs_param:obfs_param, speed_limit_per_con:speed_limit_per_con, speed_limit_per_user:speed_limit_per_user},
+                data: {_token:_token, id:id, username: username, password:password, usage:usage, pay_way:pay_way, balance:balance, score:score, status:status, labels:labels, enable_time:enable_time, expire_time:expire_time, gender:gender, wechat:wechat, qq:qq, is_admin:is_admin, remark:remark, level:level, port:port, passwd:passwd, method:method, transfer_enable:transfer_enable, enable:enable, protocol:protocol, protocol_param:protocol_param, obfs:obfs, obfs_param:obfs_param, speed_limit_per_con:speed_limit_per_con, speed_limit_per_user:speed_limit_per_user,is_salesman},
                 dataType: 'json',
                 success: function (ret) {
                     if (ret.status == 'success') {

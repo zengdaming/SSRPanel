@@ -203,7 +203,7 @@ class YzyController extends Controller
             }
 
             // 取消重复返利
-            User::query()->where('id', $order->user_id)->update(['referral_uid' => 0]);
+            // User::query()->where('id', $order->user_id)->update(['referral_uid' => 0]);
 
             DB::commit();
         } catch (\Exception $e) {

@@ -6,6 +6,7 @@ use App\Http\Models\Invite;
 use App\Http\Models\User;
 use App\Http\Models\UserLabel;
 use App\Http\Models\Verify;
+use App\Components\JsonRespone;
 use Illuminate\Http\Request;
 use App\Mail\activeUser;
 use Captcha;
@@ -24,10 +25,10 @@ use Cookie;
  */
 class RegisterController extends Controller
 {
-    // 注册页
+    // 注册页（改为ajax模式，配合前端vue改造）
     public function index(Request $request)
     {
-        $cacheKey = 'register_times_' . md5(getClientIp()); // 注册限制缓存key
+        $cacheKey = 'register_times_' . md5($request->getClientIp()); // 注册限制缓存key
 
         if ($request->method() == 'POST') {
             $username = trim($request->get('username'));
@@ -38,77 +39,82 @@ class RegisterController extends Controller
             $register_token = $request->get('register_token');
             $aff = intval($request->get('aff', 0));
 
-            // 防止重复提交
-            $session_register_token = Session::get('register_token');
-            if (empty($register_token) || $register_token != $session_register_token) {
-                Session::flash('errorMsg', '请勿重复请求，刷新一下页面再试试');
+            $json = new JsonRespone();
 
-                return Redirect::back()->withInput();
-            } else {
-                Session::forget('register_token');
-            }
+            // 防止重复提交（前端已经做了处理，所以后端不再需要处理）
+            // $session_register_token = Session::get('register_token');
+            // if (empty($register_token) || $register_token != $session_register_token) {
+            //     Session::flash('errorMsg', '请勿重复请求，刷新一下页面再试试');
+
+            //     return Redirect::back()->withInput();
+            // } else {
+            //     Session::forget('register_token');
+            // }
 
             // 是否开启注册
             if (!$this->systemConfig['is_register']) {
-                Session::flash('errorMsg', '系统维护，暂停注册');
-
-                return Redirect::back();
+                // Session::flash('errorMsg', '系统维护，暂停注册');
+                // return Redirect::back();
+                return Response::json( $json->forbid('系统维护，暂停注册') );
             }
 
             if (empty($username)) {
-                Session::flash('errorMsg', '请输入用户名');
+                // Session::flash('errorMsg', '请输入用户名');
+                // return Redirect::back()->withInput();
+                return Response::json( $json->wrong('请输入用户名') );
 
-                return Redirect::back()->withInput();
             } else if (empty($password)) {
-                Session::flash('errorMsg', '请输入密码');
+                // Session::flash('errorMsg', '请输入密码');
+                // return Redirect::back()->withInput();
+                return Response::json( $json->wrong('请输入密码') );
 
-                return Redirect::back()->withInput();
             } else if (empty($repassword)) {
-                Session::flash('errorMsg', '请重新输入密码');
+                // Session::flash('errorMsg', '请重新输入密码');
+                // return Redirect::back()->withInput();
+                return Response::json( $json->wrong('请重新输入密码') );
 
-                return Redirect::back()->withInput();
-            } else if (md5($password) != md5($repassword)) {
-                Session::flash('errorMsg', '两次输入密码不一致，请重新输入');
-
-                return Redirect::back()->withInput($request->except(['password', 'repassword']));
+            } else if ($password != $repassword) {
+                // Session::flash('errorMsg', '两次输入密码不一致，请重新输入');
+                // return Redirect::back()->withInput($request->except(['password', 'repassword']));
+                return Response::json( $json->wrong('两次输入密码不一致，请重新输入') );
             } else if (false === filter_var($username, FILTER_VALIDATE_EMAIL)) {
-                Session::flash('errorMsg', '用户名必须是合法邮箱，请重新输入');
-
-                return Redirect::back()->withInput();
+                // Session::flash('errorMsg', '用户名必须是合法邮箱，请重新输入');
+                // return Redirect::back()->withInput();
+                return Response::json( $json->wrong('用户名必须是合法邮箱，请重新输入') );
             }
 
             // 校验域名邮箱是否在敏感词中
             $sensitiveWords = $this->sensitiveWords();
             $usernameSuffix = explode('@', $username); // 提取邮箱后缀
             if (in_array(strtolower($usernameSuffix[1]), $sensitiveWords)) {
-                Session::flash('errorMsg', '邮箱含有敏感词，请重新输入');
-
-                return Redirect::back()->withInput();
+                // Session::flash('errorMsg', '邮箱含有敏感词，请重新输入');
+                // return Redirect::back()->withInput();
+                return Response::json( $json->wrong('邮箱含有敏感词，请重新输入') );
             }
 
             // 是否校验验证码
             if ($this->systemConfig['is_captcha']) {
                 if (!Captcha::check($captcha)) {
-                    Session::flash('errorMsg', '验证码错误，请重新输入');
-
-                    return Redirect::back()->withInput();
+                    // Session::flash('errorMsg', '验证码错误，请重新输入');
+                    // return Redirect::back()->withInput();
+                    return Response::json( $json->wrong('验证码错误，请重新输入') );
                 }
             }
 
             // 如果需要邀请注册
             if ($this->systemConfig['is_invite_register']) {
                 if (empty($code)) {
-                    Session::flash('errorMsg', '请输入邀请码');
-
-                    return Redirect::back()->withInput();
+                    // Session::flash('errorMsg', '请输入邀请码');
+                    // return Redirect::back()->withInput();
+                    return Response::json( $json->wrong('请输入邀请码') );
                 }
 
                 // 校验邀请码合法性
                 $codeEnable = Invite::query()->where('code', $code)->where('status', 0)->first();
                 if (empty($codeEnable)) {
-                    Session::flash('errorMsg', '邀请码不可用，请更换邀请码后重试');
-
-                    return Redirect::back()->withInput($request->except(['code']));
+                    // Session::flash('errorMsg', '邀请码不可用，请更换邀请码后重试');
+                    // return Redirect::back()->withInput($request->except(['code']));
+                    return Response::json( $json->wrong('邀请码不可用，请更换邀请码后重试') );
                 }
             }
 
@@ -117,9 +123,10 @@ class RegisterController extends Controller
                 if (Cache::has($cacheKey)) {
                     $registerTimes = Cache::get($cacheKey);
                     if ($registerTimes >= $this->systemConfig['register_ip_limit']) {
-                        Session::flash('errorMsg', '系统已开启防刷机制，请勿频繁注册');
+                        // Session::flash('errorMsg', '系统已开启防刷机制，请勿频繁注册');
+                        // return Redirect::back()->withInput($request->except(['code']));
+                        return Response::json( $json->wrong('系统已开启防刷机制，请勿频繁注册') );
 
-                        return Redirect::back()->withInput($request->except(['code']));
                     }
                 }
             }
@@ -127,17 +134,17 @@ class RegisterController extends Controller
             // 校验用户名是否已存在
             $exists = User::query()->where('username', $username)->exists();
             if ($exists) {
-                Session::flash('errorMsg', '用户名已存在，请更换用户名');
-
-                return Redirect::back()->withInput();
+                // Session::flash('errorMsg', '用户名已存在，请更换用户名');
+                // return Redirect::back()->withInput();
+                return Response::json( $json->wrong('用户名已存在，请更换用户名') );
             }
 
             // 获取可用端口
             $port = $this->systemConfig['is_rand_port'] ? $this->getRandPort() : $this->getOnlyPort();
             if ($port > $this->systemConfig['max_port']) {
-                Session::flash('errorMsg', '用户已满，请联系管理员');
-
-                return Redirect::back()->withInput();
+                // Session::flash('errorMsg', '用户已满，请联系管理员');
+                // return Redirect::back()->withInput();
+                return Response::json( $json->wrong('用户已满，请联系管理员') );
             }
 
             // 获取aff
@@ -158,7 +165,7 @@ class RegisterController extends Controller
             $user->obfs = $this->getDefaultObfs();
             $user->enable_time = date('Y-m-d H:i:s');
             $user->expire_time = date('Y-m-d H:i:s', strtotime("+" . $this->systemConfig['default_days'] . " days"));
-            $user->reg_ip = getClientIp();
+            $user->reg_ip = $request->getClientIp();
             $user->referral_uid = $referral_uid;
             $user->save();
 
@@ -209,7 +216,9 @@ class RegisterController extends Controller
                     $this->sendEmailLog($user->id, $title, $content, 0, $e->getMessage());
                 }
 
-                Session::flash('regSuccessMsg', '注册成功：激活邮件已发送，如未收到，请查看垃圾邮箱');
+                // Session::flash('regSuccessMsg', '注册成功：激活邮件已发送，如未收到，请查看垃圾邮箱');
+                return Response::json( $json->success(null,'注册成功：激活邮件已发送，如未收到，请查看垃圾邮箱') );
+
             } else {
                 // 如果不需要激活，则直接给推荐人加流量
                 if ($referral_uid) {
@@ -219,7 +228,8 @@ class RegisterController extends Controller
                     User::query()->where('id', $referral_uid)->update(['enable' => 1]);
                 }
 
-                Session::flash('regSuccessMsg', '注册成功');
+                // Session::flash('regSuccessMsg', '注册成功');
+                return Response::json( $json->success(null,'注册成功') );
             }
 
             return Redirect::to('login');

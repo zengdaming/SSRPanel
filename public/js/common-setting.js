@@ -17,3 +17,7 @@ axios.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
+//将axios封装到原型链中，这样就可以在vue中直接使用this.$http来调用，这样方法内的this就是vue实例
+//同时这样可以实现进一步封装ajax方法的效果，如果以后需要更换不同的ajax的库，也可以轻松迁移
+Vue.prototype.$http = axios;
