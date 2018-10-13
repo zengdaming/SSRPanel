@@ -244,14 +244,14 @@
         // 搜索
         function doSearch() {
             var username = $("#username").val();
-            var wechat = $("#wechat").val();
-            var qq = $("#qq").val();
-            var port = $("#port").val();
-            var pay_way = $("#pay_way option:checked").val();
+            // var wechat = $("#wechat").val();
+            // var qq = $("#qq").val();
+            // var port = $("#port").val();
+            // var pay_way = $("#pay_way option:checked").val();
             var status = $("#status option:checked").val();
             var enable = $("#enable option:checked").val();
 
-            window.location.href = '{{url('admin/userList')}}' + '?username=' + username + '&wechat=' + wechat + '&qq=' + qq + '&port=' + port + '&pay_way=' + pay_way + '&status=' + status + '&enable=' + enable;
+            window.location.href = '{{url('admin/userList')}}' + '?username=' + username + '&status=' + status + '&enable=' + enable;
         }
 
         // 重置

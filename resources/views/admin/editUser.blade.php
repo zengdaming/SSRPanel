@@ -94,7 +94,7 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                            </div> --}}
+                                            </div> 
                                             <div class="form-group">
                                                 <label for="level" class="col-md-3 control-label">级别</label>
                                                 <div class="col-md-8">
@@ -107,6 +107,8 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            --}}
+
                                             {{-- <div class="form-group">
                                                 <label for="balance" class="col-md-3 control-label">余额</label>
                                                 <div class="col-md-5">
@@ -290,7 +292,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="enable" class="col-md-3 control-label">代理状态</label>
+                                                <label for="enable" class="col-md-3 control-label">VPN账号信息</label>
                                                 <div class="col-md-8">
                                                     <div class="mt-radio-inline">
                                                         <label class="mt-radio">
@@ -338,6 +340,7 @@
                                                 </div>
                                             </div>
                                             <hr>
+                                            {{--
                                             <div class="form-group">
                                                 <label for="speed_limit_per_con" class="col-md-3 control-label">单连接限速</label>
                                                 <div class="col-md-8">
@@ -356,6 +359,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            --}}
                                             <hr>
                                             <div class="form-group">
                                                 <label for="speed_limit_per_user" class="col-md-3 control-label">邀请人</label>

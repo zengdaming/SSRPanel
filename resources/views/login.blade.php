@@ -23,7 +23,7 @@
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN PAGE LEVEL STYLES -->
     {{-- <link href="https://unpkg.com/element-ui@2.4.8/lib/theme-chalk/index.css" rel="stylesheet" type="text/css" /> --}}
-    <link href="/assets/pages/css/login-1.min.css?v=2" rel="stylesheet" type="text/css" />
+    <link href="/assets/pages/css/login-1.min.css?v=3" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
     <!-- END THEME LAYOUT STYLES -->
@@ -31,8 +31,8 @@
     <style type="text/css">
         .my-title{
             font-size  : 2.5rem;
-            padding-top: 0rem,0rem,0rem,1.2rem;
             text-align : center;
+            margin-bottom: 20px;
         }
     </style>
 
@@ -84,7 +84,7 @@
     <div id="login-panel" v-show="!isReg">
         <h2 class="my-title">用户登陆</h2>
         <form class="login-form" method="post" @submit.prevent>
-            <div class="alert alert-danger" v-show="loginTip!=null">
+            <div class="alert alert-danger" v-show="loginTip!=null" style="display: none">
                 <button class="close" @click.prevent="closeTip('loginTip')"></button>
                 <span> @{{loginTip}} </span>
             </div>

@@ -66,12 +66,12 @@
                                         <th> 操作人 </th>
                                         <th> 商品 </th>
                                         <th> 过期时间 </th>
-                                        <th> 优惠券 </th>
-                                        <th> 原价 </th>
+                                        {{-- <th> 优惠券 </th> --}}
+                                        {{-- <th> 原价 </th> --}}
                                         <th> 实价 </th>
                                         <th> 支付方式 </th>
                                         <th> 订单状态 </th>
-                                        <th> 创建时间 </th>
+                                        <th> 交易时间 </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,8 +87,8 @@
                                                 <td> {{$order->user->username}} </td>
                                                 <td> {{$order->goods->name}} </td>
                                                 <td> {{$order->is_expire ? '已过期' : $order->expire_at}} </td>
-                                                <td> {{$order->coupon ? $order->coupon->name . ' - ' . $order->coupon->sn : ''}} </td>
-                                                <td> ￥{{$order->origin_amount}} </td>
+                                                {{-- <td> {{$order->coupon ? $order->coupon->name . ' - ' . $order->coupon->sn : ''}} </td> --}}
+                                                {{-- <td> ￥{{$order->origin_amount}} </td> --}}
                                                 <td> ￥{{$order->amount}} </td>
                                                 <td> {{$order->pay_way == '1' ? '余额支付' : '有赞云支付'}} </td>
                                                 <td>
@@ -135,11 +135,11 @@
         function doSearch() {
             var username = $("#username").val();
             var is_expire = $("#is_expire").val();
-            var is_coupon = $("#is_coupon").val();
-            var pay_way = $("#pay_way").val();
+            // var is_coupon = $("#is_coupon").val();
+            // var pay_way = $("#pay_way").val();
             var status = $("#status").val();
 
-            window.location.href = '{{url('admin/orderList')}}' + '?username=' + username + '&is_expire=' + is_expire + '&is_coupon=' + is_coupon + '&pay_way=' + pay_way + '&status=' + status;
+            window.location.href = '{{url('admin/orderList')}}' + '?username=' + username + '&is_expire=' + is_expire + '&status=' + status;
         }
 
         // 重置

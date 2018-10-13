@@ -261,12 +261,17 @@ Login page
     /***
   Login page
   ***/
+    .login{
+        background-color: #fff;
+    }
     .login .logo {
         margin-top: 30px;
         padding: 0px;
     }
     .login .content {
-        width: 245px;
+        width: 100%;
+        -webkit-box-shadow: none;
+                box-shadow: none;
     }
     .login .content h3 {
         font-size: 22px;
@@ -275,3 +280,4 @@ Login page
         font-size: 13px;
     }
 }
+

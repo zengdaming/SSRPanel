@@ -355,7 +355,7 @@ class AdminController extends Controller
             DB::beginTransaction();
             try {
                 $data = [
-                    'username'             => $username,
+                    // 'username'             => $username,
                     'port'                 => $port,
                     'passwd'               => $passwd,
                     'transfer_enable'      => toGB($transfer_enable),
@@ -383,7 +383,6 @@ class AdminController extends Controller
                 if (!empty($password)) {
                     $data['password'] = md5($password);
                 }
-
                 if ( !empty($is_admin) ){
                     $data['is_admin'] = $is_admin;
                 }
