@@ -4,6 +4,7 @@ var vue = new Vue({
         refList  : [],
         tradeList: [], //交易明细记录
         showLoading   : false, //是否显示加载提示
+        tradeListLoading:false,//较硬明细的加载提示
         dialogVisible : false,//是否显示交易明细弹窗
     },
     mounted: function() {
@@ -34,7 +35,8 @@ var vue = new Vue({
         showTradeLog: function(uid) {
             var url = 'inviteStatistic/tradeLog?uid=' + uid;
             var _this = this;
-            _this.dialogVisible=true;
+            _this.dialogVisible    = true;
+            _this.tradeListLoading = true;
             axios.get(url)
                 .then(function(rsp) {
                     console.log(rsp);
@@ -47,6 +49,9 @@ var vue = new Vue({
                 .catch(function(err) {
                     console.log(err);
                     _this.$alert(err.message,'错误信息');
+                })
+                .then(function(r){
+                    _this.tradeListLoading = false;
                 });
         }
     }

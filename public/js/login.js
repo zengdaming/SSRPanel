@@ -6,6 +6,7 @@ new Vue({
         regTip    : null,   //注册错误提示
         captcha   : null,   //验证码url
         showRegWating:false,//是否显示注册等待提示
+        showLoginWating:false,//是否显示登陆等待提示
         regSuccess    :false,
         regSuccessMsg :null,
         loginForm : {       //登陆的表单数据
@@ -33,6 +34,7 @@ new Vue({
         // 提交登陆信息
         submitLogin: _.debounce(function(){
             var _this = this;
+            _this.showLoginWating = true;
             this.$http.post('login',this.loginForm)
             .then( function(r){
                 if(r.status!='success'){throw new Error(r.message)};
@@ -41,7 +43,12 @@ new Vue({
 
             .catch(function(e){
                 _this.loginTip = e.message;
+                _this.refreshCaptcha();
                 console.error('登陆失败:'+e.message);
+                alert('登陆失败:'+e.message);
+            })
+            .then(function(r){
+                _this.showLoginWating = false;
             });
         },1000,true),
 

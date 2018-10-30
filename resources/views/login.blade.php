@@ -8,7 +8,8 @@
 <head>
     <meta charset="utf-8" />
     <title>{{trans('login.title')}}</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -100,7 +101,7 @@
             @if($is_captcha)
                 <div class="form-group" style="margin-bottom:65px;">
                     <label class="control-label visible-ie8 visible-ie9">{{trans('login.captcha')}}</label>
-                    <input class="form-control form-control-solid placeholder-no-fix" style="width:60%;float:left;" type="text" autocomplete="off" placeholder="{{trans('login.captcha')}}" name="captcha" v-model="loginForm.captcha" value="" />
+                    <input class="form-control form-control-solid placeholder-no-fix" style="width:60%;float:left;" type="text" autocomplete="off" placeholder="{{trans('login.captcha')}}" name="captcha" v-model="loginForm.captcha" @keyup.enter="submitLogin"/>
                     <img :src="captcha" onclick="this.src='/captcha/default?'+Math.random()" alt="{{trans('login.captcha')}}" style="float:right;" />
                 </div>
             @endif
@@ -116,7 +117,12 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn red btn-block uppercase" @click.prevent="submitLogin">{{trans('login.login')}}</button>
+                <template v-if="!showLoginWating">
+                    <button class="btn red btn-block uppercase" @click.prevent="submitLogin">{{trans('login.login')}}</button>
+                </template>
+                <template v-else>
+                    <button v-show="showLoginWating" class="btn red uppercase btn-block" disabled @click.prevent>登陆中...</button>
+                </template>
             </div>
             <div class="create-account">
                 <p>
@@ -221,14 +227,19 @@
     gtag('config', 'UA-122312249-1');
 </script>
  --}}
-<script src="https://cdn.bootcss.com/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
-<script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
-<script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
-{{-- <script src="https://unpkg.com/element-ui@2.4.8/lib/index.js"></script> --}}
-<script src="https://cdn.jsdelivr.net/npm/underscore@1.9.1/underscore.min.js"></script>
 
-<script src="/js/common-setting.js?001" type="text/javascript"></script>
-<script src="/js/login.js?006" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+{{-- 
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4.2.5/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.9.1/underscore.min.js"></script>
+ --}}
+<script src="/js/common-setting.js?004" type="text/javascript"></script>
+<script src="/js/login.js?009" type="text/javascript"></script>
 
 <!-- 统计 -->
 {!! $website_analytics !!}

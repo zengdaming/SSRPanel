@@ -64,10 +64,10 @@
                                     <div class="tabbable-line">
                                         <ul class="nav nav-tabs ">
                                             <li class="active">
-                                                <a href="#tools1" data-toggle="tab"> <i class="fa fa-apple"></i> Mac </a>
-                                            </li>
-                                            <li>
                                                 <a href="#tools2" data-toggle="tab"> <i class="fa fa-windows"></i> Windows </a>
+                                            </li>
+                                            <li >
+                                                <a href="#tools1" data-toggle="tab"> <i class="fa fa-apple"></i> Mac </a>
                                             </li>
                                             <li>
                                                 <a href="#tools5" data-toggle="tab"> <i class="fa fa-apple"></i> iOS </a>
@@ -77,7 +77,25 @@
                                             </li>
                                         </ul>
                                         <div class="tab-content" style="font-size:16px;">
-                                            <div class="tab-pane active" id="tools1">
+                                            <div class="tab-pane active" id="tools2">
+                                                <ol>
+                                                    <span>
+                                                        <a href="https://zdm-dev.oss-cn-shenzhen.aliyuncs.com/my/ssr-win.zip" target="_blank">点击此处</a>下载客户端并启动。
+                                                        <span>详细使用教程：<a href="http://www.pingtougg.com/win-tutorial.html" target="_blank">点击查看</a></span>
+                                                    </span><br/>
+                                                    <span style="color:red"> 如果启动错误：</span><br>
+                                                        <span>Win7系统请下载安装</span><a href="https://download.microsoft.com/download/F/9/4/F942F07D-F26F-4F30-B4E3-EBD54FABA377/NDP462-KB3151800-x86-x64-AllOS-ENU.exe" target="_blank">.Net 4.6.2</a>
+                                                        <br>
+                                                        <span>Win-XP系统请下载安装</span><a href="https://dlc2.pconline.com.cn/filedown_38126_6524774/TVsfdos5/dotnetfx35.exe" target="_blank">.Net3.5</a>，使用2.0版程序
+                                                    </span>
+                                                    <br/><br/>
+                                                    <li> 鼠标右键&nbsp;单击状态栏小飞机，找到服务器->订阅->订阅设置，复制黏贴订阅地址 </li>
+                                                    <li> 鼠标右键&nbsp;单击状态栏小飞机，找到模式，选中PAC </li>
+                                                    <li> 鼠标右键&nbsp;单击状态栏小飞机，找到PAC，选中更新PAC为GFWList </li>
+                                                </ol>
+                                            </div>
+
+                                            <div class="tab-pane" id="tools1">
                                                 <ol>
                                                     <li> 
                                                       安装与使用教程：<a href="http://pingtougg.com/mac-tutorial.html" target="_blank">点击查看</a>，最新客户端：<a href="https://ptg.oss-cn-shenzhen.aliyuncs.com/tutorial/macos/ShadowsocksX-NG-R8.dmg" target="_blank">点击此处</a>
@@ -88,14 +106,7 @@
                                                     <li> 单击小飞机，选择PAC自动模式 </li>
                                                 </ol>
                                             </div>
-                                            <div class="tab-pane" id="tools2">
-                                                <ol>
-                                                    <li> <a href="https://zdm-dev.oss-cn-shenzhen.aliyuncs.com/my/ssr-win.zip" target="_blank">点击此处</a>下载客户端并启动 </li>
-                                                    <li> 鼠标右键&nbsp;单击状态栏小飞机，找到服务器->订阅->订阅设置，复制黏贴订阅地址 </li>
-                                                    <li> 鼠标右键&nbsp;单击状态栏小飞机，找到模式，选中PAC </li>
-                                                    <li> 鼠标右键&nbsp;单击状态栏小飞机，找到PAC，选中更新PAC为GFWList </li>
-                                                </ol>
-                                            </div>
+                                            
                                             <div class="tab-pane" id="tools4">
                                                 <ol>
 

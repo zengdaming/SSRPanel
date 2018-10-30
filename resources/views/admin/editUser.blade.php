@@ -14,7 +14,7 @@
             <div class="portlet light bordered">
                 <div class="portlet-body form">
                     <!-- BEGIN FORM-->
-                    <form action="{{url('admin/editUser')}}" method="post" class="form-horizontal" onsubmit="return do_submit();">
+                    <form id="editForm" class="form-horizontal">
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -147,11 +147,6 @@
                                             <div class="form-group">
                                                 <label for="status" class="col-md-3 control-label">状态</label>
                                                 <div class="col-md-8">
-                                                    {{-- <select class="form-control" name="status" id="status">
-                                                        <option value="1" @if($user->status == '1') selected @endif>正常</option>
-                                                        <option value="0" @if($user->status == '0') selected @endif>未激活</option>
-                                                        <option value="-1" @if($user->status == '-1') selected @endif>禁用</option>
-                                                    </select> --}}
                                                     <div class="mt-radio-inline">
                                                         <label class="mt-radio">
                                                             <input type="radio" name="status" value="1" {{$user->status == 1 ? 'checked' : ''}}> 正常
@@ -187,7 +182,7 @@
                                             <div class="form-group">
                                                 <label for="labels" class="col-md-3 control-label">标签</label>
                                                 <div class="col-md-8">
-                                                    <select id="labels" class="form-control select2-multiple" name="labels[]" multiple>
+                                                    <select id="labels" class="form-control select2-multiple" name="labels" multiple>
                                                         @foreach($label_list as $label)
                                                             <option value="{{$label->id}}" @if(in_array($label->id, $user->labels)) selected @endif>{{$label->name}}</option>
                                                         @endforeach
@@ -359,8 +354,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            --}}
                                             <hr>
+                                            --}}
                                             <div class="form-group">
                                                 <label for="speed_limit_per_user" class="col-md-3 control-label">邀请人</label>
                                                 <div class="col-md-8">
@@ -373,14 +368,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-actions">
+                        </form>
+                        {{-- <div class="form-actions"> --}}
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn green">提 交</button>
+                                    <button class="btn green" onclick="submitEdit(this)">提 交</button>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        {{-- </div> --}}
+                    
                     <!-- END FORM-->
                 </div>
             </div>
@@ -426,6 +422,12 @@
     <script src="/assets/global/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
     <script src="/js/layer/layer.js" type="text/javascript"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="/js/common-setting.js?004" type="text/javascript"></script>
+
+
     <script type="text/javascript">
         // 用户标签选择器
         $('#labels').select2({
@@ -463,6 +465,37 @@
                 format: 'yyyy-mm-dd'
             });
         });
+
+        // 替换do_submit方法
+        function submitEdit(btn){
+            //修改按钮，显示等待提示
+            btn.disabled = true;
+            btn.innerText='处理中...';
+            var data = $('#editForm').serializeArray();
+            var postData = {}
+            _.each( data,function(el,idx){
+                postData[el.name] = el.value;
+            });
+            // 再特别处理一下多选的字段
+            postData['labels'] = $('#labels').val();
+            console.log(postData);
+            axios.post('/admin/editUser',postData)
+            .then(function(r){
+                if(r.status!='success'){throw new Error(r.message)};
+                layer.alert('更新成功');
+            })
+
+            .catch(function(error){
+                layer.alert('更新失败：'+error.message);
+            })
+
+            .then(function(r){
+                //恢复修改按钮
+                btn.disabled = false;
+                btn.innerText='提 交';
+            });
+            return false;
+        }
 
         // ajax同步提交
         function do_submit() {

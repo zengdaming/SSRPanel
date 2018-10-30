@@ -2,7 +2,7 @@
 
 @section('css')
     <link href="/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.4.8/lib/theme-chalk/index.css">
 @endsection
 @section('title', '推广统计')
 @section('content')
@@ -19,14 +19,14 @@
                         </div>
                     </div>
                     <div id="app">
-                    <el-table :data="refList" style="width: 100%" :loading="showLoading">
-                        <el-table-column prop="username" label="推广人" width="250"></el-table-column>
-                        <el-table-column prop="count" label="推广数量" width="180">
+                    <el-table :data="refList" style="width: 100%" v-loading="showLoading">
+                        <el-table-column prop="username" label="推广人" min-width="120"></el-table-column>
+                        <el-table-column prop="count" label="推广数量" min-width="70">
                             <template slot-scope="scope">
                                 <span>@{{scope.row.count}} 人</span>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="totalAmount" label="成交总金额">
+                        <el-table-column prop="totalAmount" label="总金额" min-width="100">
                             <template slot-scope="scope">
                                 <span>@{{scope.row.totalAmount / 100}} 元</span>
                             </template>
@@ -40,7 +40,7 @@
 
                     {{-- 交易记录明细 --}}
                     <el-dialog title="交易明细" :visible.sync="dialogVisible">
-                        <el-table :data="tradeList" style="width: 100%">
+                        <el-table :data="tradeList" style="width: 100%" v-loading="tradeListLoading">
                         <el-table-column prop="user.username" label="用户"></el-table-column>
                         <el-table-column prop="amount" label="交易金额">
                             <template slot-scope="scope">
@@ -65,7 +65,7 @@
     <!-- import Vue before Element -->
     <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
     <!-- import JavaScript -->
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="/js/common-setting.js?001" type="text/javascript"></script> 
-    <script src="/js/admin/invite-statistic.js?001" type="text/javascript"></script> 
+    <script src="https://unpkg.com/element-ui@2.4.8/lib/index.js"></script>
+    <script src="/js/common-setting.js?004" type="text/javascript"></script> 
+    <script src="/js/admin/invite-statistic.js?002" type="text/javascript"></script> 
 @endsection
