@@ -49,15 +49,15 @@ class LoginController extends Controller
             if (!$user) {
                 Session::flash('errorMsg', '用户名或密码错误');
 
-                return Redirect::back()->withInput();
+                return Response::json(['status' => 'fail', 'message' => '用户名或密码错误']);
             } else if (!$user->is_admin && $user->status < 0) {
                 Session::flash('errorMsg', '账号已禁用');
 
-                return Redirect::back();
+                return Response::json(['status' => 'fail', 'message' => '账号已禁用']);
             } else if ($user->status == 0 && $this->systemConfig['is_active_register'] && $user->is_admin == 0) {
                 Session::flash('errorMsg', '账号未激活，请先<a href="/activeUser?username=' . $user->username . '" target="_blank"><span style="color:#000">【激活账号】</span></a>');
 
-                return Redirect::back()->withInput();
+                return Response::json(['status' => 'fail', 'message' => '账号未激活，查看自己的邮箱']);
             }
 
             // 更新登录信息

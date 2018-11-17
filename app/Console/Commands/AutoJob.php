@@ -173,18 +173,28 @@ class AutoJob extends Command
     }
 
     // 自动清空过期的账号的标签和流量（临时封禁不移除）
+    // 系统的默认标签依旧保留
     private function removeUserLabels()
     {
         $userList = User::query()->where('enable', 0)->where('ban_time', 0)->where('expire_time', '<=', date('Y-m-d'))->get();
+
+        $defaultLabels = [];//系统默认的标签，后续作为不删除的条件
+        if (self::$config['initial_labels_for_user']) {
+            $defaultLabels = explode(',', self::$config['initial_labels_for_user']);
+        }
         if (!$userList->isEmpty()) {
-            foreach ($userList as $user) {
-                UserLabel::query()->where('user_id', $user->id)->delete();
-                User::query()->where('id', $user->id)->update([
-                    'u'                 => 0,
-                    'd'                 => 0,
-                    'transfer_enable'   => 0,
-                    'traffic_reset_day' => 0
-                ]);
+            try {
+                foreach ($userList as $user) {
+                    UserLabel::query()->where('user_id', $user->id)->whereNotIn('label_id',$defaultLabels)->delete();
+                    User::query()->where('id', $user->id)->update([
+                        'u'                 => 0,
+                        'd'                 => 0,
+                        'transfer_enable'   => 0,
+                        'traffic_reset_day' => 0
+                    ]);
+                }
+            }catch(\Exception $e){
+                Log::error('处理过期用户失败，用户ID='.$user->id.'：' . $e);
             }
         }
     }

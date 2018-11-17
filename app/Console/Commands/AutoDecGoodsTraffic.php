@@ -55,7 +55,7 @@ class AutoDecGoodsTraffic extends Command
                         } else {
                             // 如果使用的流量比商品的流量还要多。
                             // 则将多出的流量部分，全部分给d（已下载流量）
-                            $traffic_dec = $order->user->d + $order->user->u - $order->goods->traffic * 1048576
+                            $traffic_dec = $order->user->d + $order->user->u - $order->goods->traffic * 1048576;
                             User::query()->where('id', $order->user_id)->update(['d' => $traffic_dec, 'u'=>0]);
                         }
                     }
