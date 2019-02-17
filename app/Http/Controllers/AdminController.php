@@ -220,7 +220,7 @@ class AdminController extends Controller
             $user->remark = clean($request->get('remark', ''));
             $user->level = $request->get('level', 1);
             $user->is_admin = 0;
-            $user->reg_ip = getClientIp();
+            $user->reg_ip = $request->getClientIp();
             $user->referral_uid = 0;
             $user->traffic_reset_day = 0;
             $user->status = 1;

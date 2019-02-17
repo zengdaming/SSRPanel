@@ -240,11 +240,13 @@
                                                                         @endforeach
                                                                     @endif
                                                                 </span>
+                                                                {{-- 
                                                                 <span class="mt-comment-date">
                                                                     @if(!$node->online_status)
                                                                         <span class="badge badge-danger">维护中</span>
                                                                     @endif
                                                                 </span>
+                                                                --}}
                                                             </div>
                                                             <div class="mt-comment-text"> {{$node->desc}} </div>
                                                             <div class="mt-comment-details">

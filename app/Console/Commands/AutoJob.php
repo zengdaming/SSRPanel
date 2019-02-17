@@ -112,6 +112,8 @@ class AutoJob extends Command
     // 封禁账号
     private function blockUsers()
     {
+
+        Log::info('开始清理过期用户');
         // 过期用户处理
         $userList = User::query()->where('status', '>=', 0)->where('enable', 1)->where('expire_time', '<', date('Y-m-d'))->get();
         if (!$userList->isEmpty()) {
@@ -143,6 +145,19 @@ class AutoJob extends Command
             }
         }
 
+        Log::info('开始封禁1小时内流量异常账号');
+        // 禁用流量超限用户
+        $userList = User::query()->where('status', '>=', 0)->where('enable', 1)->where('ban_time', 0)->whereRaw("u + d >= transfer_enable")->get();
+        if (!$userList->isEmpty()) {
+            foreach ($userList as $user) {
+                User::query()->where('id', $user->id)->update(['enable' => 0]);
+
+                // 写入日志
+                $this->addUserBanLog($user->id, 0, '【封禁代理】-流量已用完');
+            }
+        }
+
+        Log::info('开始封禁1小时内流量异常账号');
         // 封禁1小时内流量异常账号
         if (self::$config['is_traffic_ban']) {
             $userList = User::query()->where('status', '>=', 0)->where('enable', 1)->where('ban_time', 0)->get();
@@ -160,16 +175,7 @@ class AutoJob extends Command
             }
         }
 
-        // 禁用流量超限用户
-        $userList = User::query()->where('status', '>=', 0)->where('enable', 1)->where('ban_time', 0)->whereRaw("u + d >= transfer_enable")->get();
-        if (!$userList->isEmpty()) {
-            foreach ($userList as $user) {
-                User::query()->where('id', $user->id)->update(['enable' => 0]);
 
-                // 写入日志
-                $this->addUserBanLog($user->id, 0, '【封禁代理】-流量已用完');
-            }
-        }
     }
 
     // 自动清空过期的账号的标签和流量（临时封禁不移除）
