@@ -57,9 +57,12 @@
             </div>
             <div class="row">
                 <div class="col-xs-12" style="text-align: right;">
+                    <a class="btn btn-lg red hidden-print" onclick="onlinePay()"> {{trans('home.online_pay')}} </a>
+                    {{--
                     @if($is_youzan)
                         <a class="btn btn-lg red hidden-print" onclick="onlinePay()"> {{trans('home.online_pay')}} </a>
                     @endif
+                    --}}
                     {{-- <a class="btn btn-lg blue hidden-print uppercase" onclick="pay()"> {{trans('home.service_pay_button')}} </a> --}}
                 </div>
             </div>
@@ -70,7 +73,7 @@
 @endsection
 @section('script')
     <script src="/js/layer/layer.js" type="text/javascript"></script>
-
+    <script type="text/javascript" src="http://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
     <script type="text/javascript">
         // 校验优惠券是否可用
         function redeemCoupon() {
@@ -123,14 +126,14 @@
             var goods_id = '{{$goods->id}}';
             var coupon_sn = $('#coupon_sn').val();
 
-            index = layer.load(1, {
+            var index = layer.load(1, {
                 shade: [0.7,'#CCC']
             });
 
             $.ajax({
                 type: "POST",
                 url: "{{url('payment/create')}}",
-                async: false,
+                // async: false,
                 data: {_token:'{{csrf_token()}}', goods_id:goods_id, coupon_sn:coupon_sn},
                 dataType: 'json',
                 beforeSend: function () {

@@ -8,6 +8,7 @@ use App\Http\Models\Order;
 use App\Http\Models\Payment;
 use App\Http\Models\PaymentCallback;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 use Response;
 use Redirect;
 use Session;
@@ -29,10 +30,15 @@ class PaymentController extends Controller
             return Response::json(['status' => 'fail', 'data' => '', 'message' => '创建支付单失败：商品或服务已下架']);
         }
 
-        // 判断是否开启有赞云支付
+        // 判断是否开启有赞云支付，或者其他在线支付
         if (!$this->systemConfig['is_youzan']) {
-            return Response::json(['status' => 'fail', 'data' => '', 'message' => '创建支付单失败：系统并未开启在线支付功能']);
+            //return Response::json(['status' => 'fail', 'data' => '', 'message' => '创建支付单失败：系统并未开启在线支付功能']);
         }
+        else if( !$this->systemConfig['is_online_pay']){
+            return Response::json(['status' => 'fail', 'data' => '', 'message' => '创建支付单失败：系统并未开启在线支付功能']);
+
+        }
+        
 
         // 判断是否存在同个商品的未支付订单
         $existsOrder = Order::query()->where('status', 0)->where('user_id', $user['id'])->where('goods_id', $goods_id)->exists();
@@ -91,13 +97,17 @@ class PaymentController extends Controller
             $order->save();
 
             // 生成支付单
-            $yzy = new Yzy();
-            $result = $yzy->createQrCode($goods->name, $amount * 100, $orderSn);
-            if (isset($result['error_response'])) {
-                Log::error('【有赞云】创建二维码失败：' . $result['error_response']['msg']);
 
-                throw new \Exception($result['error_response']['msg']);
-            }
+            // $yzy = new Yzy();
+            // $result = $yzy->createQrCode($goods->name, $amount * 100, $orderSn);
+            // if (isset($result['error_response'])) {
+            //     Log::error('【有赞云】创建二维码失败：' . $result['error_response']['msg']);
+
+            //     throw new \Exception($result['error_response']['msg']);
+            // }
+
+            $result = $this->createPayQR($amount,$user['username']);
+
 
             $payment = new Payment();
             $payment->sn = $sn;
@@ -202,5 +212,59 @@ class PaymentController extends Controller
         $view['list'] = $query->orderBy('id', 'desc')->paginate(10);
 
         return Response::view('payment/callbackList', $view);
+    }
+
+    // 有赞云创建支付二维码
+    private function createYouzanQr($name,$amount,$sn){
+        $yzy = new Yzy();
+        $result = $yzy->createQrCode($name, $amount*100, $sn);
+        if (isset($result['error_response'])) {
+            Log::error('【有赞云】创建二维码失败：' . $result['error_response']['msg']);
+            throw new \Exception($result['error_response']['msg']);
+        }
+        return $result;
+    }
+
+    // 私有的创建支付二维码，如果要接入其他第四方支付的话，请重写这个方法就可以了
+    private function createPayQR($amount,$user_name){
+
+        $client = new Client();
+        $url = $this->systemConfig['pay_url'];
+        $res = $client->request('POST', $url, [
+            'form_params' => [
+                'command' => 'applyqr',
+                'money' => $amount*100,//单位：分
+                'user_name'=> $user_name,
+                'channel'=>'wechat',//渠道暂时只支持微信
+            ]
+        ]);
+        $status = $res->getStatusCode();
+        // "200"
+        $contentType = $res->getHeader('content-type');
+        // 'application/json; charset=utf8'
+        $body = $res->getBody();
+        // {"type":"User"...'
+
+        if( $status !="200"){
+            $msg = '【其他平台】创建二维码失败：网络失败：' . $status;
+            Log::error( $msg );
+            throw new \Exception($msg );
+            return;
+        }
+        Log::info("请求支付二维码成功，返回数据是".$body);
+        $body =  json_decode($body);
+        if( $body->status != 1 ){
+            Log::error("二维码接口返回失败，失败消息：".$body->message );
+            throw new \Exception( $body->message );
+            return;
+        }
+
+        return  [
+            'response'=>[
+                'qr_id'=>$body->data->mark_sell,
+                'qr_url'=>$body->data->url,
+                'qr_code'=>$body->data->mark_sell,
+            ],
+        ];
     }
 }

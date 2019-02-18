@@ -99,19 +99,31 @@ class YzyController extends Controller
         exit();
     }
 
+    public function callback(Request $request){
+        $json = $request->getContent();
+        Log::info('收到的数据是：'.$json);
+        $data = json_decode($json, true);
+        if (!$data) {
+            Log::info('回调数据无法解析，可能是非法请求'.$json);
+            exit();
+        }
+        $this->tradePaid($data);
+    }
+
     // 交易支付
     private function tradePaid($msg)
     {
-        Log::info('【有赞云】回调交易支付');
+        Log::info('回调交易支付');
 
-        $payment = Payment::query()->where('qr_id', $msg['qr_info']['qr_id'])->first();
+        // $payment = Payment::query()->where('qr_id', $msg['qr_info']['qr_id'])->first();//有赞的调用
+        $payment = Payment::query()->where('qr_code', $msg['qr_info']['qr_id'])->first();//我们自己的支付平台的调用
         if (!$payment) {
-            Log::info('【有赞云】回调订单不存在');
+            Log::info('回调订单不存在');
             exit();
         }
 
         if ($payment->status != '0') {
-            Log::info('【有赞云】回调订单状态不正确');
+            Log::info('回调订单状态不正确');
             exit();
         }
 
@@ -119,7 +131,8 @@ class YzyController extends Controller
         DB::beginTransaction();
         try {
             // 更新支付单
-            $payment->pay_way = $msg['full_order_info']['order_info']['pay_type_str'] == 'WEIXIN_DAIXIAO' ? 1 : 2; // 1-微信、2-支付宝
+            // $payment->pay_way = $msg['full_order_info']['order_info']['pay_type_str'] == 'WEIXIN_DAIXIAO' ? 1 : 2; // 1-微信、2-支付宝
+            $payment->pay_way = 1;
             $payment->status = 1;
             $payment->save();
 

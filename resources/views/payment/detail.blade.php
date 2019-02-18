@@ -11,7 +11,7 @@
         <div class="portlet light bordered">
             <div class="portlet-body">
                 <div class="alert alert-info" style="text-align: center;">
-                    请使用<strong style="color:red;">支付宝、QQ、微信</strong>扫描如下二维码
+                    请使用<strong style="color:red;">微信</strong>扫描如下二维码
                 </div>
                 <div class="row" style="text-align: center; font-size: 1.05em;">
                     <div class="col-md-12">
@@ -40,7 +40,12 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2" align="center">
-                                        <img src="{{$payment->qr_local_url}}"/>
+                                        {{-- <img src="{{$payment->qr_local_url}}"/> --}}
+                                        <div align="center" id="qr" style="text-align: center;width: 303px"></div>
+                                        <div id="success-tip" style="display: none">
+                                            <i class="fa fa-check-circle" aria-hidden="true" style="color:green;font-size: 100px;line-height: 100px"></i>
+                                            <h3>支付成功</h3>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>
@@ -55,10 +60,23 @@
 @endsection
 @section('script')
     <script src="/js/layer/layer.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
     <script type="text/javascript">
         // 每2秒查询一次订单状态
+        var task = null;
+        var $successTip = undefined;
+        var $qr = undefined;
         $(document).ready(function(){
-            setInterval("getStatus()", 1000);
+            task = setInterval("getStatus()", 1000);
+
+            var qrcode = new QRCode(document.getElementById("qr"), {
+                width : 300,
+                height : 300
+            });
+
+            $successTip = $("#success-tip");
+            $qr         = $("#qr");
+            qrcode.makeCode('{{$payment->qr_url}}');
         });
 
         // 检查支付单状态
@@ -68,9 +86,10 @@
             $.get("{{url('payment/getStatus')}}", {sn:sn}, function (ret) {
                 console.log(ret);
                 if (ret.status == 'success') {
-                    layer.msg(ret.message, {time:1500}, function() {
-                        window.location.href = '{{url('invoices')}}';
-                    });
+                    window.clearInterval(task);
+                    $successTip.show();
+                    $qr.hide();
+                    //layer.msg(ret.message, {time:5000});
                 }
             });
         }
