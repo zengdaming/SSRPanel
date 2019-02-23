@@ -35,15 +35,23 @@ class PaymentController extends Controller
             //return Response::json(['status' => 'fail', 'data' => '', 'message' => '创建支付单失败：系统并未开启在线支付功能']);
         }
         else if( !$this->systemConfig['is_online_pay']){
-            return Response::json(['status' => 'fail', 'data' => '', 'message' => '创建支付单失败：系统并未开启在线支付功能']);
+            return Response::json([
+                'status' => 'fail',
+                'data' => '',
+                'message' => '创建支付单失败：系统并未开启在线支付功能']
+            );
 
         }
         
 
         // 判断是否存在同个商品的未支付订单
-        $existsOrder = Order::query()->where('status', 0)->where('user_id', $user['id'])->where('goods_id', $goods_id)->exists();
+        $existsOrder = Order::query()->where('status', 0)->where('user_id', $user['id'])->where('goods_id', $goods_id)->first();
         if ($existsOrder) {
-            return Response::json(['status' => 'fail', 'data' => '', 'message' => '创建支付单失败：尚有未支付的订单，请先去支付']);
+            // return Response::json(['status' => 'fail', 'data' => '', 'message' => '创建支付单失败：尚有未支付的订单，请先去支付']);
+            // 返回要未支付的相同商品的订单的sn，让前端跳转到该支付页面
+            $p = Payment::query()->where('order_sn',$existsOrder->order_sn)->where('user_id', $user['id'])->first();
+            return Response::json(['status' => 'success', 'data' => $p->sn , 'message' => '正在转到付款页面，请稍后']);
+
         }
 
         // 限购控制

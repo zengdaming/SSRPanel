@@ -104,7 +104,7 @@ class YzyController extends Controller
         Log::info('收到的数据是：'.$json);
         $data = json_decode($json, true);
         if (!$data) {
-            Log::info('回调数据无法解析，可能是非法请求'.$json);
+            Log::error('回调数据无法解析，可能是非法请求'.$json);
             exit();
         }
         $this->tradePaid($data);
@@ -122,8 +122,10 @@ class YzyController extends Controller
             exit();
         }
 
-        if ($payment->status != '0') {
-            Log::info('回调订单状态不正确');
+        // FIXME:这里有问题，因为我们无法阻止用户支付，如果用户真的支付了，要如何事后处理
+        // 建议增加一个重复支付的记录，好让客服处理，也同时发邮件给用户提醒
+        if ($payment->status == '1') {
+            Log::warn('订单已经支付过了，无需再支付');
             exit();
         }
 

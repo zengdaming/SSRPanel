@@ -50,7 +50,7 @@ class AutoJob extends Command
         $this->blockUsers();
 
         // 自动移除被封禁账号的标签
-        $this->removeUserLabels();
+        // $this->removeUserLabels();//这个设计有问题，并且不是必须流程
 
         // 自动解封被封禁的账号
         $this->unblockUsers();
@@ -274,7 +274,7 @@ class AutoJob extends Command
     private function closeOrder()
     {
         // 自动关闭超时未支付的有赞云订单（有赞云收款二维码超过30分钟自动关闭，我们限制15分钟内必须付款）
-        $paymentList = Payment::query()->with(['order', 'order.coupon'])->where('status', 0)->where('created_at', '<=', date("Y-m-d H:i:s", strtotime("-15 minutes")))->get();
+        $paymentList = Payment::query()->with(['order', 'order.coupon'])->where('status', 0)->where('created_at', '<=', date("Y-m-d H:i:s", strtotime("-30 minutes")))->get();
         if (!$paymentList->isEmpty()) {
             DB::beginTransaction();
             try {
