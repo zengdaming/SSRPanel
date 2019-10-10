@@ -11,6 +11,7 @@ use App\Http\Models\PaymentCallback;
 use App\Http\Models\ReferralLog;
 use App\Http\Models\User;
 use App\Http\Models\UserLabel;
+use App\Constant\PayWayEnum;
 use Illuminate\Http\Request;
 use Log;
 use DB;
@@ -107,6 +108,7 @@ class YzyController extends Controller
             Log::error('回调数据无法解析，可能是非法请求'.$json);
             exit();
         }
+        $data->pay_way = PayWayEnum::WECHAT;
         $this->tradePaid($data);
     }
 
@@ -134,7 +136,7 @@ class YzyController extends Controller
         try {
             // 更新支付单
             // $payment->pay_way = $msg['full_order_info']['order_info']['pay_type_str'] == 'WEIXIN_DAIXIAO' ? 1 : 2; // 1-微信、2-支付宝
-            $payment->pay_way = 1;
+            $payment->pay_way = $msg->pay_way;
             $payment->status = 1;
             $payment->save();
 

@@ -7,6 +7,7 @@ use App\Http\Models\Goods;
 use App\Http\Models\Order;
 use App\Http\Models\Payment;
 use App\Http\Models\PaymentCallback;
+use App\Constant\PayWayEnum;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Response;
@@ -100,7 +101,7 @@ class PaymentController extends Controller
             $order->amount = $amount;
             $order->expire_at = date("Y-m-d H:i:s", strtotime("+" . $goods->days . " days"));
             $order->is_expire = 0;
-            $order->pay_way = 2;
+            $order->pay_way = 3;//1-余额，2-有赞云，3-平头Pay
             $order->status = 0;
             $order->save();
 
@@ -122,7 +123,7 @@ class PaymentController extends Controller
             $payment->user_id = $user['id'];
             $payment->oid = $order->oid;
             $payment->order_sn = $orderSn;
-            $payment->pay_way = 1;
+            $payment->pay_way = PayWayEnum::WECHAT;;
             $payment->amount = $amount;
             $payment->qr_id = $result['response']['qr_id'];
             $payment->qr_url = $result['response']['qr_url'];
@@ -234,7 +235,7 @@ class PaymentController extends Controller
     }
 
     // 私有的创建支付二维码，如果要接入其他第四方支付的话，请重写这个方法就可以了
-    private function createPayQR($amount,$user_name){
+    private function createPayQR(int $amount,string $user_name){
 
         $client = new Client();
         $url = $this->systemConfig['pay_url'];
@@ -254,12 +255,18 @@ class PaymentController extends Controller
         // {"type":"User"...'
 
         if( $status !="200"){
-            $msg = '【其他平台】创建二维码失败：网络失败：' . $status;
+            $msg = '创建二维码失败：网络失败：' . $status;
             Log::error( $msg );
             throw new \Exception($msg );
             return;
         }
-        Log::info("请求支付二维码成功，返回数据是".$body);
+        if( strlen($body) < 3 ){
+            $msg = '创建二维码失败：返回的JSON数据长度有问题，原始数据是：'.$body;
+            Log::error( $msg );
+            throw new \Exception($msg );
+            return;
+        }
+        Log::info("成功获取二维码，返回数据是".$body);
         $body =  json_decode($body);
         if( $body->status != 1 ){
             Log::error("二维码接口返回失败，失败消息：".$body->message );

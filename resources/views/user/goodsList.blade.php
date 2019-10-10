@@ -79,7 +79,8 @@
 
     <script type="text/javascript">
         function buy(goods_id) {
-            window.location.href = '{{url('user/addOrder?goods_id=')}}' + goods_id;
+            //window.location.href = '{{url('user/addOrder?goods_id=')}}' + goods_id;
+            alert('支付系统维护中，维护期间，免费无限使用。感谢你对平头哥的支持');
         }
 
         // 编辑商品

@@ -86,20 +86,27 @@
                                                 <td> {{$order->order_sn}} </td>
                                                 <td> {{$order->user->username}} </td>
                                                 <td> {{$order->goods->name}} </td>
-                                                <td> {{$order->is_expire ? '已过期' : $order->expire_at}} </td>
+                                                <td> {{$order->is_expire ? '已过期' : date('Y-m-d', strtotime($order->expire_at))}} </td>
                                                 {{-- <td> {{$order->coupon ? $order->coupon->name . ' - ' . $order->coupon->sn : ''}} </td> --}}
                                                 {{-- <td> ￥{{$order->origin_amount}} </td> --}}
                                                 <td> ￥{{$order->amount}} </td>
-                                                <td> {{$order->pay_way == '1' ? '余额支付' : '有赞云支付'}} </td>
+                                                {{-- <td> {{$order->pay_way == '1' ? '余额支付' : '有赞云支付'}} </td> --}}
+                                                <td>
+                                                    @if( $order->pay_way == '1' ) 余额支付
+                                                    @elseif ($order->pay_way== '2') 有赞云
+                                                    @elseif ($order->pay_way== '3') 平头Pay
+                                                    @else 未知渠道
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if($order->status == '-1')
-                                                        已关闭
+                                                        <span class="label label-danger">已关闭</span>
                                                     @elseif ($order->status == '0')
-                                                        待支付
+                                                        <span class="label label-info">待支付</span>
                                                     @elseif ($order->status == '1')
-                                                        已支付待确认
+                                                        <span class="label label-primary">已支付待确认</span>
                                                     @else
-                                                        已完成
+                                                        <span class="label label-success">已完成</span>
                                                     @endif
                                                 </td>
                                                 <td> {{$order->created_at}} </td>

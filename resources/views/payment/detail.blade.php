@@ -60,8 +60,14 @@
 @endsection
 @section('script')
     <script src="/js/layer/layer.js" type="text/javascript"></script>
-    <script type="text/javascript" src="http://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+    <script type="text/javascript" src="https://static.runoob.com/assets/qrcode/qrcode.min.js"></script>
+    <script>
+    if (typeof QRCode == 'undefined') {
+    document.write(unescape("%3Cscript src='/assets/global/plugins/qrcode.min.js' type='text/javascript'%3E%3C/script%3E")); 
+    }
+    </script>
     <script type="text/javascript">
+
         // 每2秒查询一次订单状态
         var task = null;
         var $successTip = undefined;
